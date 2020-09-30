@@ -1,0 +1,240 @@
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Bootstrap 4 Minimal Template</title>
+
+	<link rel="shortcut icon" href="" type="image/x-icon">
+	<link rel="apple-touch-icon" href="">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!-- Link to your css file -->
+	<link rel="stylesheet" href="">
+    <style>
+        .pinfo {
+            background: #ffffff;
+            border-radius: 10px;
+        }
+        
+        .savebtn {
+            background: #299E98;
+            width: 25%;
+            margin-left: 10%;
+            color: #ffffff;
+            font-size: 22px;
+            margin-bottom: 10%;
+        }
+        
+        .savebtn:hover {
+            background: #397d7a;
+            width: 25%;
+            margin-left: 10%;
+            color: #ffffff;
+            font-size: 22px;
+            margin-bottom: 10%;
+        }
+        
+        input[type=text], input[type=number], input[type=email], input[type=password], select {
+            border: none;
+            border-radius: 7px;
+            height: 35px;
+            text-indent: 3px;
+            background: #f6f6f9;
+            font-size: 15px;
+            width: 100%;
+            margin: 0px;
+
+        }
+        
+        
+        input[type=file] {
+            border: none;
+            background: #fafafa;
+            padding: 4px;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .savebtn {
+                width: 85%;
+                margin-left: 7%;
+            }
+        }
+
+        /* Small devices (portrait tablets and large phones, 600px and up) */
+        @media only screen and (min-width: 600px) and (max-width: 768px) {
+        }
+    </style>
+
+</head>
+
+<body class="bg-light">
+    
+    
+	<!-- Start coding here -->
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+<section id="info pt-4" class="">
+    <div class="container">
+        <div class="row p-3">
+            <div class="col-md-4 col-lg-4 mb-4">
+                <div class="pinfo p-4">
+                    <h4>Personal Info</h4>
+                    <hr>
+                    <p id="cname"><span class="font-weight-bold">Name: </span></p>
+                    <p id="cemail"><span class="font-weight-bold">Email: </span></p>
+                    <p id="ccnumber"><span class="font-weight-bold">Cell Number: </span></p>
+                    <p id="cmname"><span class="font-weight-bold">Middle Name: </span></p>
+                    <p id="csname"><span class="font-weight-bold">Last Name: </span></p>
+                    <p id="cidtype"><span class="font-weight-bold">ID Type: </span></p>
+                    <p id="cidnum"><span class="font-weight-bold">ID Number/Certificate Registration No: </span></p>
+                    <h4>Demographics</h4>
+                    <hr>
+                    <p id="cpin"><span class="font-weight-bold">PIN: </span></p>
+                    <p id="ccname"><span class="font-weight-bold">Country: </span></p>
+                    <p id="cpobox"><span class="font-weight-bold">PO Box: </span></p>
+                    <p id="ctown"><span class="font-weight-bold">Town: </span></p>
+                    <p id="cconst"><span class="font-weight-bold">Constituency: </span></p>
+                    <p id="cward"><span class="font-weight-bold">Ward: </span></p>
+                    <p id="clrnum"><span class="font-weight-bold">LR No: </span></p>
+                    <p id="cestate"><span class="font-weight-bold">Estate/Village: </span></p>
+                    <p id="cduplicates"><span class="font-weight-bold">Duplicate: </span></p>
+                    <p id="cvcode"><span class="font-weight-bold">Vertical Code: </span></p>
+                    <p id="cccp"><span class="font-weight-bold">Customer Contact Person:</span> </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 mb-4">
+                <div class="pinfo p-4">
+                    <h4>Supply Info</h4>
+                    <hr>
+                    <p id="cvoltage"><span class="font-weight-bold">Voltage: </span></p>
+                    <p id="cctype"><span class="font-weight-bold">Connection Type: </span></p>
+                    <p id="ccdate"><span class="font-weight-bold">Connection Date: </span></p>
+                    <p id="camd"><span class="font-weight-bold">Authorised Max Demand: </span></p>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 mb-1">
+                <div class="pinfo p-4">
+                    <h4>Documents</h4>
+                    <hr>
+                    <p id="cidc"><span class="font-weight-bold">ID Copy / Certificate Registration </span><br></p>
+                    <p id="cpcc"><span class="font-weight-bold">Pin Certificate Copy  </span><br></p>
+                    <p id="cdtc"><span class="font-weight-bold">Deed Title Copy  </span><br></p>
+                    <p id="cwc"><span class="font-weight-bold">Wiring certificate  </span><br></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    {% for field in form %}
+        <p class="input" id="{{forloop.counter0}}">
+            {% render_field field class="form-control" %}
+        </p>
+    {% endfor %}
+   <button type="submit" class="btn btn-light savebtn pb-2">Save</button>
+</form>
+
+
+	<!-- Coding End -->
+
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+<script>
+    
+window.onload = function() {
+    document.querySelectorAll(".input").forEach(function(element) {
+        //console.log(element.getAttribute("id"));
+        if(element.getAttribute("id")==0){
+            document.getElementById("cname").appendChild(element);
+        }
+        else if(element.getAttribute("id")==1){
+            document.getElementById("ccnumber").appendChild(element);
+        }
+        else if(element.getAttribute("id")==2){
+            document.getElementById("cemail").appendChild(element);
+        }
+        else if(element.getAttribute("id")==3){
+            document.getElementById("cmname").appendChild(element);
+        }
+        else if(element.getAttribute("id")==4){
+            document.getElementById("csname").appendChild(element);
+        }
+        else if(element.getAttribute("id")==5){
+            document.getElementById("cidtype").appendChild(element);
+        }
+        else if(element.getAttribute("id")==6){
+            document.getElementById("cidnum").appendChild(element);
+        }
+        else if(element.getAttribute("id")==7){
+            document.getElementById("cpin").appendChild(element);
+        }
+        else if(element.getAttribute("id")==8){
+            document.getElementById("ccname").appendChild(element);
+        }
+        else if(element.getAttribute("id")==9){
+            document.getElementById("cpobox").appendChild(element);
+        }
+        else if(element.getAttribute("id")==10){
+            document.getElementById("ctown").appendChild(element);
+        }
+        else if(element.getAttribute("id")==11){
+            document.getElementById("cconst").appendChild(element);
+        }
+        else if(element.getAttribute("id")==12){
+            document.getElementById("cward").appendChild(element);
+        }
+        else if(element.getAttribute("id")==13){
+            document.getElementById("clrnum").appendChild(element);
+        }
+        else if(element.getAttribute("id")==14){
+            document.getElementById("cestate").appendChild(element);
+        }
+        else if(element.getAttribute("id")==15){
+            document.getElementById("cduplicates").appendChild(element);
+        }
+        else if(element.getAttribute("id")==16){
+            document.getElementById("cvcode").appendChild(element);
+        }
+        else if(element.getAttribute("id")==17){
+            document.getElementById("cccp").appendChild(element);
+        }
+        else if(element.getAttribute("id")==18){
+            document.getElementById("cvoltage").appendChild(element);
+        }
+        else if(element.getAttribute("id")==19){
+            document.getElementById("cctype").appendChild(element);
+        }
+        else if(element.getAttribute("id")==20){
+            document.getElementById("ccdate").appendChild(element);
+        }
+        else if(element.getAttribute("id")==21){
+            document.getElementById("camd").appendChild(element);
+        }
+        else if(element.getAttribute("id")==22){
+            document.getElementById("cidc").appendChild(element);
+        }
+        else if(element.getAttribute("id")==23){
+            document.getElementById("cpcc").appendChild(element);
+        }
+        else if(element.getAttribute("id")==24){
+            document.getElementById("cdtc").appendChild(element);
+        }
+        else if(element.getAttribute("id")==25){
+            document.getElementById("cwc").appendChild(element);
+        }
+        
+    });
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .btn {
+        color: #ffffff;
+    }
+    
+    
+    .totalorders {
+        background: #299E98;
+        border-radius: 10px;
+        color: #ffffff;
+    }
+    hr {
+        color: #ffffff;
+        background: #ffffff;
+    }
+    
+    .ordersrow {
+        font-size: 14px;
+        max-width: 82%;
+        border-radius: 20px;
+    }
+    
+    
+    input[type=text], input[type=number], input[type=email], input[type=password], select {
+        border: none;
+        border-radius: 25px;
+        height: 35px;
+        text-indent: 3px;
+        background: #f6f6f9;
+        font-size: 15px;
+        width: 100%;
+        margin: 0px;
+
+    }
+    
+    .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #B3BBBE;
+      opacity: 0.8; /* Firefox */
+    }
+      
+      
+     ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #B3BBBE;
+      opacity: 0.8; /* Firefox */
+    }
+      
+      option, select {
+          font-size: 16px;
+          padding: 8px;
+      }
+      .filterlabel {
+          color: #B3BBBE;
+      }
+    
+    .thead {
+    }
+
+</style>
+<nav class="navbar navbar-expand-md fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="../../../static/imgs/logo.svg" class="img-fluid" alt=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-3 mt-3">
+            <a class="nav-link active" href="">Home</a>
+          </li>
+          <li class="nav-item mr-3 mt-3">
+            <a class="nav-link active" href="{% url 'analytics' %}">Analytics</a>
+          </li>
+           <li class="nav-item mr-3 mt-3">
+               {% for i in userid %}
+                <a class="nav-link" href="{% url 'customer' i %}">Profile</a>
+               {% endfor %}
+           </li>
+           <li class="nav-item mr-3 mt-3 pt-2">
+            <p>Hello, {{request.user}}</p>
+           </li>
+           <li class="nav-item mr-3 mt-3">
+            <a class="btn btn-primary btn-md logoutbtn" href="{% url 'logout' %}" role="button">logout</a>
+           </li>
+        </ul>
+      </div>
+   </div>
+</nav>
+<br>
+<br>
+<br>
+<br>
+<section id="stats">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-md-4 col-lg-4">
+                <div class="totalorders text-center p-4">
+                    <h4>New Applications</h4>
+                    <hr>
+                    <h4>{{total_orders}}</h4>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class="totalorders text-center p-4">
+                    <h4>Waiting for Qoute</h4>
+                    <hr>
+                    <h4>{{total_delivered}}</h4>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class="totalorders text-center p-4">
+                    <h4>Waiting to be Sent</h4>
+                    <hr>
+                    <h4>{{total_pending}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="orders">
+    <div class="container ordersrow p-4">
+    <div class="tabletop d-flex">
+            <h3>Applications</h3>
+            <div class="filters ml-auto">
+                <select id="status" class="mt-2">
+                  <option value="volvo">Upcoming</option>
+                  <option value="saab">Past</option>
+                </select> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-lg-4">
+                <div class="totalorders2 text-center p-4">
+                    <div class="table-responsive-md">
+                        <table class="table table-sm">
+                           <thead class="thead">
+                               <tr>
+                                   <th scope="col">Type</th>
+                                   <th scope="col">Date</th>
+                                   <th scope="col">Plan</th>
+                                   <th scope="col">Loc</th>
+                                   <th scope="col">Ref No.</th>
+                                   <th scope="col">Status</th>
+                                   <th scope="col">Supply</th>
+                                   <th scope="col">Wayleave</th>
+                                   <th scope="col">Proposal</th>
+                                   <th scope="col"><p class="d-none">Proposal</p></th>
+                                   <th scope="col"><p class="d-none">Proposal</p></th>
+                                   
+                               </tr>
+                           </thead>
+                           <tbody>
+                               {% for i in orders %}
+                                <tr>
+                                    <td>{{i.product}}</td>
+                                    <td>{{i.date_created}}</td>
+                                    <td>{{i.status}}</td>
+                                    <td>{{i.loc}}</td>
+                                    <td>{{i.appnum}}</td>
+                                    <td>{{i.appstatus}}</td>
+                                    <td>{{i.agreebtn}}</td>
+                                    <td>{{i.agreewayleave}}</td>
+                                    <td class="d-none" id="appcontrol{{i.id}}">{{i.appcontrol}}</td>
+                                    <td>{{i.proposal}}</td>
+                                    <td>
+                                    {% for j in customers %}
+                                        {% ifequal j.id i.customer.id %}
+                                            <a id="psbtn{{ forloop.counter0 }}" class="btn simobtn btn-sm" href="{% url 'customerforclerk' j.id %}" role="button">See more Docs</a>
+                                        {% endifequal %}
+                                    {% endfor %}</td>
+                                    <td>
+                                    {% for j in customers %}
+                                        {% ifequal j.id i.customer.id %}
+                                            <div class="d-flex">
+                                            <a href="{% url 'busdev' j.id %}" class="btn simobtn btn-sm mr-2"  role="button">Send Job</a>
+                                            <a href="{% url 'icms' j.id %}" class="btn simobtn btn-sm"  role="button">Upload Qoute</a>              
+                                            </div>
+                                        {% endifequal %}
+                                    {% endfor %}</td>
+                                </tr>
+                               {% endfor %}
+                           </tbody>
+                       </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+        $(".sendbtn").click(function(){
+            var str2 = "#appcontrol"+$(this).attr('id');
+            var controlele = $(str2)[0];
+            console.log(controlele.textContent);
+        });
+    });
+</script>
+{% endblock content %}

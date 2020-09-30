@@ -1,0 +1,331 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+<style>
+    
+    body {
+        overflow-x: hidden;
+    }
+
+    .tablebg {
+      background: #ffffff;
+      width: max-content;
+      padding: 30px;
+      border-radius: 20px;
+    }
+
+    .thdata {
+      font-size: 12px;
+
+    }
+    p {
+        12px;
+    }
+
+    .myth {
+      border-bottom: 2px solid #fafafa;
+    }
+
+    .buttominfo {
+      border-top: 2px solid #fafafa;
+      padding-top: 15px;
+    }
+
+    .tddata {
+      font-size: 12px;
+    }
+    
+    input[type=text], input[type=number], input[type=email], input[type=password], select {
+        border: none;
+        border-radius: 25px;
+        height: 35px;
+        text-indent: 3px;
+        background: #f6f6f9;
+        font-size: 15px;
+        width: 100%;
+        margin: 0px;
+
+    }
+    
+    .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #B3BBBE;
+      opacity: 0.8; /* Firefox */
+    }
+      
+      
+     ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #B3BBBE;
+      opacity: 0.8; /* Firefox */
+    }
+      
+      option, select {
+          font-size: 15px;
+          padding: 8px;
+      }
+      .filterlabel {
+          color: #B3BBBE;
+      }
+    
+    .thdata {
+        width: max-content;
+        text-align: start;
+    } 
+    
+    .applications {
+        max-width: max-content;
+    }
+    
+    #qoutations2 {
+        display: none;
+    }
+    
+    
+    
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    #qoutations2 {
+        display: block;
+    }
+    
+    #qoutations {
+        display: none;
+    }
+    
+    .filters {
+        width: 40%;
+    }
+    
+    .tablebg {
+        width: auto;
+        padding: 10px;
+    }
+    
+    .col-sm-1 {
+        width: 11%;
+    }
+    
+    .tddata {
+        font-size: 4.5px;
+    }
+    
+    .thdata {
+        font-size: 5px;
+    }
+    
+      option, select {
+          font-size: 8px;
+          padding: 5px;
+      }
+    
+    select {
+        height: 20px;
+        text-indent: 3px;
+        background: #f6f6f9;
+        width: 100%;
+        margin: 0px;
+        font-size: 8px;
+    }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {...}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {...}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...}
+      
+</style>
+
+
+<nav class="navbar navbar-expand-md fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="../../../static/imgs/logo.svg" class="img-fluid" alt=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><img class="img-fluid" src="../../../static/imgs/menuicon.svg" alt="image"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-3 mt-3">
+            <a class="nav-link active" href="{% url 'user' %}">Home</a>
+          </li>
+            <li class="nav-item mr-3 mt-3">
+                 <a class="nav-link" href="{% url 'qoutations' customer.id %}">Qoutations &amp; Payments</a>
+            </li>
+          <li class="nav-item mr-3 mt-3">
+            <a class="nav-link active" href="{% url 'create_app' customer.id %}">Applications</a>
+          </li>
+           <li class="nav-item mr-3 mt-3">
+               <a class="nav-link" href="">Profile</a>
+           </li>
+           <li class="nav-item mr-3 mt-3 pt-2">
+            <p>Hello, {{request.user}}</p>
+           </li>
+           <li class="nav-item mr-3 mt-3">
+            <a class="btn btn-primary btn-md logoutbtn" href="{% url 'logout' %}" role="button">logout</a>
+           </li>
+        </ul>
+      </div>
+   </div>
+</nav>
+<br>
+<br>
+<br>
+<br>
+<section id="info pt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-lg-4 mb-3">
+                <div class="pinfo p-4">
+                    <h4>Add</h4>
+                    <hr>
+                    <div class="custbtn text-center">
+                        <a class="btn btn-info p-2 newinfobtn" href="{% url 'profile' %}" role="button">Personal Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 mb-3">
+                <div class="pinfo p-4">
+                    <h4>Contact Info</h4>
+                    <hr>
+                    <p><span class="font-weight-bold">Email: </span>{{customer.email}}</p>
+                    <p><span class="font-weight-bold">Phone: </span>{{customer.phone}}</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 mb-3">
+                <div class="pinfo p-4">
+                    <h4>Total Applications</h4>
+                    <hr>
+                    <h3 class="text-center">{{orders_count}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="info pt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-lg-4 mb-3">
+                <div class="pinfo p-4">
+                    <h4>Personal Info</h4>
+                    <hr>
+                    <p><span class="font-weight-bold">Name: </span>{{customer.name}}</p>
+                    <p><span class="font-weight-bold">Middle Name: </span>{{customer.middlename}}</p>
+                    <p><span class="font-weight-bold">Last Name: </span>{{customer.lastname}}</p>
+                    <p><span class="font-weight-bold">ID Type: </span>{{customer.idtype}}</p>
+                    <p><span class="font-weight-bold">ID Number/Certificate Registration No: </span>{{customer.idnum}}</p>
+                    <h4>Demographics</h4>
+                    <hr>
+                    <p><span class="font-weight-bold">Country: </span>{{customer.country}}</p>
+                    <p><span class="font-weight-bold">Personal Identification No.: </span>{{customer.pin}}</p>
+                    <p><span class="font-weight-bold">PO Box: </span>{{customer.pobox}}</p>
+                    <p><span class="font-weight-bold">Town: </span>{{customer.town}}</p>
+                    <p><span class="font-weight-bold">Constituency: </span>{{customer.constituency}}</p>
+                    <p><span class="font-weight-bold">Ward: </span>{{customer.ward}}</p>
+                    <p><span class="font-weight-bold">LR No: </span>{{customer.lr_num}}</p>
+                    <p><span class="font-weight-bold">Estate/Village: </span>{{customer.estate_village}}</p>
+                    <p><span class="font-weight-bold">Duplicate: </span>{{customer.duplicate}}</p>
+                    <p><span class="font-weight-bold">Vertical Code: </span>{{customer.vcode}}</p>
+                    <p><span class="font-weight-bold">Customer Contact Person:</span> {{customer.ccp}}</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 mb-3">
+                <div class="pinfo p-4">
+                    <h4>Supply Info</h4>
+                    <hr>
+                    <p><span class="font-weight-bold">Voltage: </span>{{customer.voltage}}</p>
+                    <p><span class="font-weight-bold">Connection Type: </span>{{customer.connetype}}</p>
+                    <p><span class="font-weight-bold">Connection Date: </span>{{customer.connedate}}</p>
+                    <p><span class="font-weight-bold">Authorised Max Demand: </span>{{customer.amd}}</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 mb-3">
+                <div class="pinfo p-4">
+                    <h4>Documents</h4>
+                    <hr>
+                    <p>
+                        <span class="font-weight-bold">Supply Agreement Form</span><br><a id="agreeform" class="text-info" href="{% url 'supply_agreement' customer.id %}" role="button">Sign form</a>
+                        </p>
+                    <p><span class="font-weight-bold">ID Copy / Certificate of Registration </span><br><a href="/imgs/{{customer.profile_pic}}" class="text-info">View ID</a></p>
+                    <p><span class="font-weight-bold">Wayleaves Approval  </span><br><a id="agreeform" class="text-info" href="{% url 'wayleave_agreement' customer.id %}" role="button">Sign form</a></p>
+                    <p><span class="font-weight-bold">Pin Certificate Copy  </span><br><a href="/imgs/{{customer.pincertificate}}" class="text-info">View Pin Certificate</a></p>
+                    <p><span class="font-weight-bold">Deed Title Copy  </span><br><a href="/imgs/{{customer.td}}" class="text-info">View Title Deed</a></p>
+                    <p><span class="font-weight-bold">Wiring certificate  </span><br><a href="/imgs/{{customer.wc}}" class="text-info">View Wiring Certificate</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="qoutations" class="pt-5 pb-5 d-none">
+   <div class="container applications">
+       <div class="tablebg d-block mx-auto">
+        <div class="tabletop d-flex">
+            <h4>Applications</h4>
+            <div class="filters d-flex ml-auto">
+                <select id="status" class="mt-2">
+                  <option value="volvo">Upcoming</option>
+                  <option value="saab">Past</option>
+                </select> 
+            </div>
+        </div>
+
+        <div class="row myth d-flex pt-3">
+            
+            <div class="col"><p class="thdata"><strong>TYPE</strong></p></div>
+            <div class="col"><p class="thdata"><strong>PLAN</strong></p></div>
+            <div class="col"><p class="thdata"><strong>DATE APPLIED</strong></p></div>
+            <div class="col"><p class="tddata"><strong>LOCATION</strong></p></div>
+            <div class="col"><p class="thdata"><strong>REF NUMBER</strong></p></div>
+            <div class="col"><p class="thdata"><strong>STATUS</strong></p></div>
+            <div class="col"><p class="thdata"><strong>SUPPLY AGREEMENT</strong></p></div>
+            <div class="col"><p class="thdata"><strong>WAYLEAVE AGREEMENT</strong></p></div>
+            <div class="col"><p class="thdata d-none"><strong>WAYLEAVE AGREEMENT</strong></p></div>
+            <div class="col"><p class="thdata d-none"><strong>SUPPLY AGREEMENT</strong></p></div>
+        </div>
+
+
+        {% for i in orders %}
+        <div class="row mytd d-flex">
+            <div class="col"><p class="tddata pt-2">{{i.product}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.status}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.date_created}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.loc}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.appnum}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.appstatus}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.agreebtn}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.agreewayleave}}</p></div>
+            <div class="col"><p class="tddata pt-2 d-none">{{i.appcontrol}}</p></div>
+            <div class="col"><p class="tddata pt-2"><a class="btn btn-primary btn-sm" href="{% url 'create_order' customer.id %}" role="button">update</a></p></div>
+            <div class="col"><p class="tddata pt-2"><a class="btn btn-danger btn-sm" href="{% url 'delete' i.id %}" role="button">delete</a></p></div>
+        </div>
+       {% endfor%}
+
+        <div class="buttominfo d-flex ml-auto">
+            <div class="navbtns ml-auto d-flex">
+                <p class="tddata pl-2">End of results</p>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+    $(document).ready(function(){
+        $("#submitBtn").click(function(){
+            $("#myForm").submit(); // Submit the form
+        });
+    });
+</script>
+{% endblock content %}

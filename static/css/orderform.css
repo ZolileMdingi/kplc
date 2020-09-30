@@ -1,0 +1,239 @@
+    
+    body {
+        overflow-x: hidden;
+    }
+    
+    
+      #sidebar-wrapper {
+          padding-top: 5%;
+      }
+      
+      .plabel {
+        color: #B3BBBE;
+        font-size: 13px;
+      }
+      
+      .picplaceholder {
+          border: 2px dashed #B3BBBE;
+      }
+      
+      .uploadimgbtn {
+          background: transparent;
+          border-radius: 25px;
+          color: #7882F3;
+          border: 2px solid #D9DEFC;
+          font-size: 12px;
+          height: 34px;
+      }
+      
+      .uploadimgbtn:hover {
+          border: 2px solid #7882F3;
+          color: #7882F3;
+      }
+      
+      .deleteimgbtn {
+          background: transparent;
+          border-radius: 25px;
+          color: #D11A2A;
+          border: 2px solid #F0B5BB;
+          font-size: 12px;
+          height: 34px;
+      }
+      
+      .deleteimgbtn:hover {
+          border: 2px solid #D11A2A;
+          color: #D11A2A;
+      }
+      
+      
+      .productinfo, .productformbtns {
+          border-top: 2px solid #f6f6f9;
+          margin-top: 22px;
+          padding-top: 11%;
+      }
+      
+      
+      label, select {
+          display: block;
+          color: #0A0918;
+      }
+      
+      select {
+          background: #f6f6f9;
+          border-radius: 25px;
+          width: 100%;
+          padding: 7px;
+          border: none;
+          text-indent: 10px;
+          color: #0A0918;
+          
+      }
+      
+    input[type=text], input[type=number], input[type=email], input[type=password] {
+        border: none;
+        border-radius: 25px;
+        height: 35px;
+        text-indent: 3px;
+        background: #f6f6f9;
+        font-size: 15px;
+        width: 100%;
+        margin: 0px;
+
+    }
+      
+      .btnsave {
+          background: #7882F3;
+          border: 2px solid #7882F3;
+          border-radius: 35px;
+          height: 38px;
+          padding: 3px;
+          color: #ffffff;
+          width: 45%;
+      }
+      
+      .btnsave:hover {
+          color: #ffffff;
+          background: #6972d6;
+          border: 2px solid #6972d6;
+      }
+      
+      .btn-light {
+          color: #BFBFBF;
+          border-radius: 20px;
+      }
+
+    .tablebg {
+      background: #ffffff;
+      width: auto;
+      padding: 30px;
+      border-radius: 20px;
+    }
+
+    .thdata {
+      font-size: 12px;
+
+    }
+    p {
+        12px;
+    }
+
+    .myth {
+      border-bottom: 2px solid #fafafa;
+    }
+
+    .buttominfo {
+      border-top: 2px solid #fafafa;
+      padding-top: 15px;
+    }
+
+    .tddata {
+      font-size: 12px;
+    }
+    
+    input[type=text], input[type=number], input[type=email], input[type=password], select {
+        border: none;
+        border-radius: 25px;
+        height: 35px;
+        text-indent: 3px;
+        background: #f6f6f9;
+        font-size: 15px;
+        width: 100%;
+        margin: 0px;
+
+    }
+    
+    .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #B3BBBE;
+      opacity: 0.8; /* Firefox */
+    }
+      
+      
+     ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #B3BBBE;
+      opacity: 0.8; /* Firefox */
+    }
+      
+      option, select {
+          font-size: 15px;
+          padding: 8px;
+      }
+      .filterlabel {
+          color: #B3BBBE;
+      }
+    
+    .thdata {
+        width: max-content;
+        text-align: start;
+    } 
+    
+    .applications {
+        max-width: max-content;
+    }
+    
+    #qoutations2 {
+        display: none;
+    }
+    
+    
+    
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    #qoutations2 {
+        display: block;
+    }
+    
+    #qoutations {
+        display: none;
+    }
+    
+    .filters {
+        width: 40%;
+    }
+    
+    .tablebg {
+        width: auto;
+        padding: 10px;
+    }
+    
+    .col-sm-1 {
+        width: 11%;
+    }
+    
+    .tddata {
+        font-size: 4.5px;
+    }
+    
+    .thdata {
+        font-size: 5px;
+    }
+    
+      option, select {
+          font-size: 8px;
+          padding: 5px;
+      }
+    
+    select {
+        height: 20px;
+        text-indent: 3px;
+        background: #f6f6f9;
+        width: 100%;
+        margin: 0px;
+        font-size: 8px;
+    }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {...}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {...}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...}
+    

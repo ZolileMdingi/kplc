@@ -1,0 +1,491 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Bootstrap 4 Minimal Template</title>
+
+	<link rel="shortcut icon" href="" type="image/x-icon">
+	<link rel="apple-touch-icon" href="">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!-- Link to your css file -->
+    <link rel="stylesheet" href="../../static/css/custom.css">
+    <link rel="stylesheet" href="../../../static/css/Chart.css">
+    
+    <style>
+        .graph {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 15px;
+            height: 350px;
+        }
+        
+        .totalorders {
+            background: #299E98;
+            border-radius: 10px;
+            color: #ffffff;
+        }
+        hr {
+            color: #ffffff;
+            background: #ffffff;
+        }
+        
+        .col-lg-6 {
+            max-width: 47%;
+        }
+        
+        .col-lg-4 {
+            max-width: 33.111111%;
+        }
+        
+    </style>
+
+</head>
+
+<body class="bg-light">
+	<!-- Start coding here -->
+    <nav class="navbar navbar-expand-md fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><img src="../../../static/imgs/logo.svg" class="img-fluid" alt=""></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item mr-3 mt-3">
+                <a class="nav-link active" href="{% url 'home' %}">Home</a>
+              </li>
+              <li class="nav-item mr-3 mt-3">
+                <a class="nav-link active" href="{% url 'analytics' %}">Analytics</a>
+              </li>
+               <li class="nav-item mr-3 mt-3">
+                   {% for i in userid %}
+                    <a class="nav-link" href="{% url 'customer' i %}">Profile</a>
+                   {% endfor %}
+               </li>
+               <li class="nav-item mr-3 mt-3 pt-2">
+                <p>Hello, {{request.user}}</p>
+               </li>
+               <li class="nav-item mr-3 mt-3">
+                <a class="btn btn-primary btn-md logoutbtn" href="{% url 'logout' %}" role="button">logout</a>
+               </li>
+            </ul>
+          </div>
+       </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+	<section id="graphs">
+        <div class="container">
+            <div class="row pt-4">
+                <div class="col-md-4 col-lg-4">
+                    <div class="totalorders text-center p-4">
+                        <h4>Total Applications</h4>
+                        <hr>
+                        <h4>{{total_orders}}</h4>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="totalorders text-center p-4">
+                        <h4>Sites Visited</h4>
+                        <hr>
+                        <h4>{{sites_visited}}</h4>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="totalorders text-center p-4">
+                        <h4>Applications Installed</h4>
+                        <hr>
+                        <h4>{{app_installed}}</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6 pb-5 pr-5 graph">
+                    <div class="graphlabels ml-auto">
+                        <h4>Average time Job takes</h4>
+                    </div>
+                    <hr>
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6 pb-5 pl-5 graph">
+                    <div class="graphlabels ml-auto">
+                        <h4>Monthly Application types</h4>
+                    </div>
+                    <hr>
+                    <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6 pr-5 graph">
+                    <div class="graphlabels ml-auto">
+                        <h4>Home Appliances</h4>
+                    </div>
+                    <hr>
+                    <canvas id="myChart3"></canvas>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6 pl-5 graph">
+                    <div class="graphlabels ml-auto">
+                        <h4>Application per Constituency</h4>
+                    </div>
+                    <hr>
+                    <canvas id="myChart4"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="jobtypes d-block">
+        <p id="tn">{{tnew}}</p>
+        <p id="tt">{{tt}}</p>
+        <p id="tr">{{tr}}</p>
+        <p id="tga">{{tga}}</p>
+        <p id="tal">{{tal}}</p>
+        <p id="tms">{{tms}}</p>
+    </div>
+
+	<!-- Coding End -->
+
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"></script>
+    <script src="../../../static/js/Chart.bundle.min.js"></script>
+    <script src="../../../static/js/Chart.js"></script>
+    <script>
+        // Bar chart
+        new Chart(document.getElementById("myChart"), {
+            type: 'bar',
+            data: {
+              labels: ["Under Review", "Waiting for Qoute", "On Design", "Site visited", "Installed"],
+              datasets: [
+                {
+                  label: "Population (millions)",
+                  backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                  data: [2,30,17,10,16]
+                }
+              ]
+            },
+            options: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: 'Time (days) jobs take in each stage in September'
+              }
+            }
+        });
+</script> <!--Bar-->
+    <script>
+        //console.log($("#tn").val());
+        new Chart(document.getElementById("myChart2"), {
+            type: 'pie',
+            data: {
+              labels: ["New", "Temporary", "Routing", "Group Application", "Additional Loal", "Meter Seperation"],
+              datasets: [{
+                label: "Population (millions)",
+                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#6B1BB3"],
+                data: [parseInt($("#tn").text()),parseInt($("#tt").text()), parseInt($("#tr").text()), parseInt($("#tga").text()), parseInt($("#tal").text()), parseInt($("#tms").text())]
+              }]
+            },
+            options: {
+              title: {
+                display: true,
+                text: 'Application types in September'
+              }
+            }
+        });
+	</script> <!--Pie-->
+    <script>
+        new Chart(document.getElementById("myChart3"), {
+            type: 'doughnut',
+            data: {
+              labels: ["Light Bulb", "Socket", "Cooker", "Water Heater", "Oven", "Single Phase Motor", "Three Phase Motor", "Air Conditioner", "Furnace", "Other"],
+              datasets: [
+                {
+                  label: "Population (millions)",
+                  backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#279900", "#0B0FE6", "#E66322", "#E6BD0B", "#5E3980"],
+                  data: [2478,435, 4433, 6898, 5267,734,784,433, 234, 2984]
+                }
+              ]
+            },
+            options: {
+              title: {
+                display: true,
+                text: 'Most used home appliances in 2020'
+              }
+            }
+        });
+	</script> <!--Dounut-->
+    <script>
+        Chart.defaults.global.legend.display = false;
+        new Chart(document.getElementById("myChart4"), {
+            type: 'bubble',
+            data: {
+              labels: "Changamwe",
+              datasets: [
+                {
+                  label: ["Jomvu"],
+                  backgroundColor: "rgba(255,221,50,0.2)",
+                  borderColor: "rgba(255,221,50,1)",
+                  data: [{
+                    x: 1000000,
+                    y: 5.245,
+                    r: 5
+                  }]
+                }, {
+                  label: ["Kisauni"],
+                  backgroundColor: "rgba(60,186,159,0.2)",
+                  borderColor: "rgba(60,186,159,1)",
+                  data: [{
+                    x: 2000000,
+                    y: 7.526,
+                    r: 5
+                  }]
+                }, {
+                  label: ["Nyali"],
+                  backgroundColor: "rgba(0,0,0,0.2)",
+                  borderColor: "#000",
+                  data: [{
+                    x: 3000000,
+                    y: 3.994,
+                    r: 5
+                  }]
+                }, {
+                  label: ["Likoni"],
+                  backgroundColor: "#5BB0A0",
+                  borderColor: "#5BB0A0",
+                  data: [{
+                    x: 4000000,
+                    y: 5.921,
+                    r: 7
+                  }]
+                }, {
+                  label: ["Mvita"],
+                  backgroundColor: "#77FCE4",
+                  borderColor: "#77FCE4",
+                  data: [{
+                    x: 5000000,
+                    y: 6.994,
+                    r: 5
+                  }]
+                }, {
+                  label: ["Msambweni"],
+                  backgroundColor: "#FCBD6A",
+                  borderColor: "#FCBD6A",
+                  data: [{
+                    x: 6000000,
+                    y: 1.921,
+                    r: 7
+                  }]
+                }, {
+                  label: ["Lunga Lunga"],
+                  backgroundColor: "#3846B0",
+                  borderColor: "#3846B0",
+                  data: [{
+                    x: 7000000,
+                    y: 3.994,
+                    r: 5
+                  }]
+                }, {
+                  label: ["Matuga"],
+                  backgroundColor: "#5D70FC",
+                  borderColor: "#5D70FC",
+                  data: [{
+                    x: 8000000,
+                    y: 5.921,
+                    r: 7
+                  }]
+                }, {
+                  label: ["Kinango"],
+                  backgroundColor: "#FCBD6A",
+                  borderColor: "#FCBD6A",
+                  data: [{
+                    x: 9000000,
+                    y: 6.994,
+                    r: 5
+                  }]
+                }, {
+                  label: ["Kilifi North"],
+                  backgroundColor: "#5165FC",
+                  borderColor: "#5165FC",
+                  data: [{
+                    x: 10000000,
+                    y: 5.621,
+                    r: 7
+                  }]
+                }, {
+                  label: ["Kilifi South"],
+                  backgroundColor: "#FC895D",
+                  borderColor: "#FC895D",
+                  data: [{
+                    x: 11000000,
+                    y: 3.994,
+                    r: 5
+                  }]
+                }, {
+                  label: ["Kaloleni"],
+                  backgroundColor: "#B2FC83",
+                  borderColor: "#B2FC83",
+                  data: [{
+                    x: 12000000,
+                    y: 1.921,
+                    r: 7
+                  }]
+                }, {
+                  label: ["Rabai"],
+                  backgroundColor: "#51BFFC",
+                  borderColor: "#51BFFC",
+                  data: [{
+                    x: 12450000,
+                    y: 1.994,
+                    r: 5
+                  }]
+                }, {
+                  label: ["Ganze"],
+                  backgroundColor: "#F75DFC",
+                  borderColor: "#F75DFC",
+                  data: [{
+                    x: 13000000,
+                    y: 2.921,
+                    r: 7
+                  }]
+                }, {
+                  label: ["Malindi"],
+                  backgroundColor: "#B2FC83",
+                  borderColor: "#B2FC83",
+                  data: [{
+                    x: 14500000,
+                    y: 3.994,
+                    r: 5
+                  }]
+                }, {
+                  label: ["Magarini"],
+                  backgroundColor: "#A9F5FD",
+                  borderColor: "#A9F5FD",
+                  data: [{
+                    x: 15000000,
+                    y: 4.921,
+                    r: 7
+                  }]
+                }, {
+                  label: ["Garsen"],
+                  backgroundColor: "#40C9B0",
+                  borderColor: "#40C9B0",
+                  data: [{
+                    x: 16000000,
+                    y: 3.994,
+                    r: 5
+                  }]
+                }, {
+                  label: ["Galole"],
+                  backgroundColor: "#C9AA40",
+                  borderColor: "#C9AA40",
+                  data: [{
+                    x: 17000000,
+                    y: 2.921,
+                    r: 7
+                  }]
+                }, {
+                  label: ["Bura"],
+                  backgroundColor: "#BD8D4F",
+                  borderColor: "#BD8D4F",
+                  data: [{
+                    x: 18000000,
+                    y: 1.994,
+                    r: 5
+                  }]
+                }, {
+                  label: ["Lamu East"],
+                  backgroundColor: "#E3AA5F",
+                  borderColor: "#E3AA5F",
+                  data: [{
+                    x: 20000000,
+                    y: 3.921,
+                    r: 7
+                  }]
+                }, {
+                  label: ["Lamu West"],
+                  backgroundColor: "#7D5E34",
+                  borderColor: "#7D5E34",
+                  data: [{
+                    x: 21000000,
+                    y: 1.934,
+                    r: 5
+                  }]
+                }, {
+                  label: ["Taveta"],
+                  backgroundColor: "#FE8A5E",
+                  borderColor: "#FE8A5E",
+                  data: [{
+                    x: 21200000,
+                    y: 2.921,
+                    r: 7
+                  }]
+                }, {
+                  label: ["Wundanyi"],
+                  backgroundColor: "#FCBD6A",
+                  borderColor: "#FCBD6A",
+                  data: [{
+                    x: 22000000,
+                    y: 3.994,
+                    r: 5
+                  }]
+                }, {
+                  label: ["Mwatate"],
+                  backgroundColor: "rgba(193,46,12,0.2)",
+                  borderColor: "rgba(193,46,12,1)",
+                  data: [{
+                    x: 23000000,
+                    y: 5.921,
+                    r: 7
+                  }]
+                }, {
+                  label: ["Voi"],
+                  backgroundColor: "#E34D66",
+                  borderColor: "#E34D66",
+                  data: [{
+                    x: 25000000,
+                    y: 6.994,
+                    r: 5
+                  }]
+                }
+              ]
+            },
+            options: {
+              title: {
+                display: true,
+                text: 'Application per contituency (Hundreds) in 2020'
+              }, scales: {
+                yAxes: [{ 
+                  scaleLabel: {
+                    display: true,
+                    labelString: "No. of Applications"
+                  }
+                }],
+                xAxes: [{ 
+                  scaleLabel: {
+                    display: true,
+                    labelString: "Contituencies"
+                  }
+                }]
+              }
+            }
+        });
+</script> <!--Dots-->
+
+    
+
+</body>
+</html>

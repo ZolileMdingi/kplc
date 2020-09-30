@@ -1,0 +1,634 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<style>
+    .leftcontainer {
+        background: #ffffff;
+        height: 898px;
+    }
+    
+  #addnewpbtn, .addpsbtn {
+      display: table;
+
+  }
+
+  .addpsbtn {
+      padding-top: 200px;
+  }
+    
+    
+    .productstatus a, .productprice a{
+        font-size: 10px;
+    }
+    
+    .addproductsform {
+        display: none;
+    }
+    .tablebg {
+      background: #ffffff;
+      width: auto;
+      padding: 30px;
+      border-radius: 20px;
+    }
+    
+    
+    .hideshow {
+        display: none;
+    }
+    
+/* Extra small devices (phones, 600px and down) */
+    @media only screen and (max-width: 600px) {
+        .leftcontainer {
+            position: absolute;
+            z-index: 20;
+            box-shadow: 2px;
+        }
+        
+        .hideshow {
+            display: block;
+            margin-left: 100%;
+            background: #ffffff;
+            width: max-content;
+            border-radius: 0px 10px 10px 0px;
+        }
+        
+        #hideform {
+            padding-left: 10px;
+            padding-right: 18px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            
+        }
+    }
+    
+    /* Small devices (portrait tablets and large phones, 600px and up) */
+    @media only screen and (min-width: 600px) and (max-width: 768px) {
+
+    }
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 768px) {...}
+
+    /* Large devices (laptops/desktops, 992px and up) */
+    @media only screen and (min-width: 992px) {...}
+
+    /* Extra large devices (large laptops and desktops, 1200px and up) */
+    @media only screen and (min-width: 1200px) {...}
+    
+    
+</style>
+
+
+<nav class="navbar navbar-expand-md fixed-top shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="../../../static/imgs/logo.svg" class="img-fluid" alt=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><img class="img-fluid" src="../../../static/imgs/menuicon.svg" alt="image"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-3 mt-3">
+            <a class="nav-link active" href="{% url 'user' %}">Home</a>
+          </li>
+            <li class="nav-item mr-3 mt-3">
+                 <a class="nav-link" href="{% url 'qoutations' customer.id %}">Qoutations &amp; Payments</a>
+            </li>
+          <li class="nav-item mr-3 mt-3">
+            <a class="nav-link active" href="">Applications</a>
+          </li>
+           <li class="nav-item mr-3 mt-3">
+               <a class="nav-link" href="{% url 'customer' customer.id %}">Profile</a>
+           </li>
+           <li class="nav-item mr-3 mt-3 pt-2">
+            <p>Hello, {{request.user}}</p>
+           </li>
+           <li class="nav-item mr-3 mt-3">
+            <a class="btn btn-primary btn-md logoutbtn" href="{% url 'logout' %}" role="button">logout</a>
+           </li>
+        </ul>
+      </div>
+   </div>
+</nav>
+<br>
+<br>
+<br>
+
+<div class="bigcontainer d-flex">
+    <div class="leftcontainer">
+        <div class="hideshow" id="hideshow">
+            <p class="" id="hideform">Hide</p>
+        </div>
+        <h4 class="pl-4 pr-4 pt-5">Start New Application</h4>
+        <div class="addpsbtn text-center mx-auto">
+            <button type="button" class="btn uploadimgbtn" id="addnewpbtn"><img class="img-fluid pr-2 pb-1" src="../../../static/imgs/addpbtn.svg" alt="image">New Application</button>
+        </div>
+        <div id="page-content-wrapper" class="pb-4 pl-4 pr-4 pt-2 addproductsform">
+            <div class="productinfo">
+                <p class="plabel">APPLICATION INFO</p>
+                <div class="category pb-3">
+                    <label for="categories">Application type:</label>
+                    <select id="categories" class="pb-2">
+                        <option value="3">New</option>
+                        <option value="4">Temporary</option>
+                        <option value="5">Routing</option>
+                        <option value="6">Group Application</option>
+                        <option value="7">Additional Load</option>
+                        <option value="8">Meter Seperation</option>
+                    </select>
+                </div>
+                <div class="productname pb-4">
+                    <label for="plans">Plan:</label>
+                    <select id="plans" class="pb-2">
+                        <option value="Standard Application">Standard Application</option>
+                        <option value="Premium Application">Premium Application</option>
+                    </select>
+                </div>
+                <div class="productdescr pb-4">
+                    <label class="pplabel">Location</label>
+                    <input type="text" class="form-control pt-0" id="exampleFormControlInput1" placeholder="">        
+                </div>
+                <div class="productqty pb-4">
+                    <label class="pplabel">Ref Number</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="">       
+                </div>
+                <div class="productprice pb-4">
+                    <label class="pplabel">Supply Agreement</label>
+                    <a class="btn-warning" href="#" role="button" data-toggle="modal" data-target="#exampleModal">Read Supply Ts&amp;Cs before accepting</a>
+                    <select id="supplysel" class="pb-2 mt-3">
+                        <option value="NO I DO NOT AGREE">No I dont Agree</option>>
+                        <option value="YES I AGREE">Yes I Agree</option>
+                    </select>            
+                </div>
+                <div class="productstatus pb-4">
+                    <label for="waylsel">Wayleave Agreement</label>
+                    <a class="btn-warning mb-2" href="#" role="button" data-toggle="modal" data-target="#exampleModal2">Read Wayleave Ts &amp; Cs before accepting</a>
+                    <select id="waylsel" class="pb-2 mt-3">
+                        <option value="NO I DO NOT AGREE">No I dont Agree</option>>
+                        <option value="YES I AGREE">Yes I Agree</option>
+                        
+                    </select>                  
+                </div>
+            </div>
+
+            <div class="productformbtns d-flex">
+                <button type="button" class="btn btn-light discardbtn">Discard</button>
+                <button type="button" class="btn btnsave ml-auto" id="saveproductbtn">Submit</button>
+            </div>
+            
+            <!-- Start Modals -->
+            
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Supply Agreement form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>1/We the undersigned owner/tenant/occupier of the premises stated under the title of supply data agree with the
+company to take a supply of Electrical energy at the mentioned premises to all the lamps, apparatus and motors
+installed not exceeding the KVA stated in the item And (KVA) and in respect of any variation I/We agree to notify the
+company under the Methods of Charge contained in the Methods of Charge (Kenya Power) Byelaws 19............. as amended
+from time to time or in any Byelaws substituted therefore and as specified below'and!
+<br><br>
+We herehy agree: .
+<br><br>
+a) To pay the charges for such supply from time to time as published by the Company pursuit to Section 73 of the
+Electric Power Act.
+<br><br>
+b) That the provisions of and conditions contained in the supply Contract and Conditions (EAP&amp;L) Byelaws 1953 as
+ammended from time to time shall be the basis of and form part of my/our contract with the Company
+<br><br>
+c) To allow authourised Kenya Power personnel entry into the premises of supply for purposes of reading the meter, and
+inspecting the installation to ascertain that the same is in a good working order.
+<br><br>
+d) To avoid any kind of meter damage and/or meter tampering so as to avoid unauthorised/fraudulent use of electricity.
+The maximum demand of this supply will not exceed the KVA stated in the item AMD (KVA)withouth the written consent
+of the company.
+<br><br>
+The methods of charge are specified in Methods of Charge (Kenya Power) Byelaws 19............. as amended from time to time
+<br><br>
+or in any Byelaws substituted therefore, and the prices are published in the Company's Schedule of “Prices for
+- Electrical Suppliés in Kenya”.
+<br><br>
+For and on behalf of the customer.
+
+We undertake to supply above subject to the provisions of Electric Power At and all Rules and Byelaws from time to
+time to in force thereunder.
+
+For and on behalf of
+KENYA POWER
+<br><br>
+Choose "Yes I agree" below to confirm and Submit.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Wayleave Agreement form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>I/We {{customer.name}} being the proprietor of parcel of land comprised in
+Title No {{customer.housenum}} hereby consent to The Kenya Power laying or erecting an
+electric supply line on my side of land and from time to time entering upon and having access to my said piece of land for the
+purposes of constructing, laying, maintaining, using, removing and replacing the electric supply line.<br><br>
+I undertake not to interfere or permit any interference with the electric supply line nor to construct buildings, plant trees or dump
+waste materials beneath the electric supply line. I also undertake that this consent shall be irrevocable.<br><br>
+I have supplied copies of Title deed and Land search documents as proof of ownership.
+<br><br>
+Choose "Yes I agree" below to confirm and Submit.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    delete
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Modal -->
+          <div class="container-fluid d-none">
+            <div class="container addproducts">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ formset.management_form }}
+                    {% for form in formset %}
+                        <div class="productform" id="productform{{forloop.counter0}}">
+                            {% for field in form %}
+                                {% with name="Productpic" %}
+                                    {% ifnotequal field.label name %}
+                                        {% render_field field class="productinput" %}
+                                    {% else %}
+                                        {% render_field field class="productinput" onchange="loadFile(event)" %}
+                                    {% endifnotequal %}
+                                {% endwith %}
+                             {% endfor %}
+                        </div>
+                    <hr>
+                    {% for dict in formset.errors %}
+                        {% for error in dict.values %}
+                        {{ error }}
+                        {% endfor %}
+                    {% endfor %}
+                    {% endfor %}
+                    <button type="submit" class="btn abtn" id="productformsubmit">Submit</button>
+                </form>
+            </div>
+          </div>
+        </div>
+    </div>
+  <div class="rightcontainer">
+    <section id="qoutations" class="pt-5 pb-5">
+       <div class="container applications">
+           <div class="tablebg d-block mx-auto">
+            <div class="tabletop d-flex">
+                <h4>Applications</h4>
+                <h2 class="d-none" id="tbordercounter">{{orders_count}}</h2>
+                <div class="filters d-flex ml-auto">
+                    <select id="status" class="mt-2">
+                      <option value="volvo">Upcoming</option>
+                      <option value="saab">Past</option>
+                    </select> 
+                </div>
+            </div>
+
+            <div class="row myth d-flex pt-3">
+
+                <div class="col"><p class="thdata"><strong>TYPE</strong></p></div>
+                <div class="col"><p class="thdata"><strong>PLAN</strong></p></div>
+                <div class="col"><p class="thdata"><strong>DATE APPLIED</strong></p></div>
+                <div class="col"><p class="tddata"><strong>LOCATION</strong></p></div>
+                <div class="col"><p class="thdata"><strong>REF NUMBER</strong></p></div>
+                <div class="col"><p class="thdata"><strong>STATUS</strong></p></div>
+                <div class="col"><p class="thdata"><strong>SUPPLY AGREEMENT</strong></p></div>
+                <div class="col"><p class="thdata"><strong>WAYLEAVE AGREEMENT</strong></p></div>
+                <div class="col"><p class="thdata d-none"><strong>WAYLEAVE AGREEMENT</strong></p></div>
+                <div class="col"><p class="thdata d-none"><strong>SUPPLY AGREEMENT</strong></p></div>
+            </div>
+
+
+            {% for i in orders %}
+            <div class="row mytd d-flex">
+                <div class="col"><p class="tddata pt-2">{{i.product}}</p></div>
+                <div class="col"><p class="tddata pt-2">{{i.status}}</p></div>
+                <div class="col"><p class="tddata pt-2">{{i.date_created}}</p></div>
+                <div class="col"><p class="tddata pt-2">{{i.loc}}</p></div>
+                <div class="col"><p class="tddata pt-2">{{i.appnum}}</p></div>
+                <div class="col"><p class="tddata pt-2">{{i.appstatus}}</p></div>
+                <div class="col"><p class="tddata pt-2">{{i.agreebtn}}</p></div>
+                <div class="col"><p class="tddata pt-2">{{i.agreewayleave}}</p></div>
+                <div class="col"><p class="tddata pt-2 d-none">{{i.appcontrol}}</p></div>
+                <div class="col-sm-1 pt-2"><a class="" href="{% url 'delete' i.id %}" role="button"><img class="img-fluid" src="../../../static/imgs/xicon.svg" alt="image"></a>
+                </div>
+            </div>
+           {% endfor%}
+
+            <div class="buttominfo d-flex ml-auto">
+                <div class="navbtns ml-auto d-flex">
+                    <p class="tddata pl-2">End of results</p>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+      <p class="d-none" id="customervcode">{{customer.vcode}}</p>
+    <section id="qoutations2" class="pt-5 pb-5">
+       <div class="container">
+           <div class="tablebg d-block mx-auto">
+            <div class="tabletop d-flex">
+                <h4>Applications</h4>
+                <div class="filters pt-4 ml-auto">
+                    <select id="status" class="mt-2">
+                      <option value="volvo">Upcoming</option>
+                      <option value="saab">Past</option>
+                    </select> 
+                </div>
+            </div>
+
+            <div class="row myth d-flex pt-3">
+                <div class="col-sm-1"><p class="thdata"><strong>TYPE</strong></p></div>
+                <div class="col-sm-1"><p class="thdata"><strong>PLAN</strong></p></div>
+                <div class="col-sm-1"><p class="thdata"><strong>DATE</strong></p></div>
+                <div class="col-sm-1"><p class="tddata"><strong>LOCATION</strong></p></div>
+                <div class="col-sm-1"><p class="thdata"><strong>REF Number</strong></p></div>
+                <div class="col-sm-1"><p class="thdata"><strong>STATUS</strong></p></div>
+                <div class="col-sm-1"><p class="thdata"><strong>SUPPLY</strong></p></div>
+                <div class="col-sm-1"><p class="thdata"><strong>WAYLEAVE</strong></p></div>
+                <div class="col-sm-1"><p class="thdata d-none"><strong>WAYLEAVE AGREEMENT</strong></p></div>
+                <div class="col-sm-1"><p class="thdata d-none"><strong>SUPPLY AGREEMENT</strong></p></div>
+            </div>
+
+
+            {% for i in orders %}
+            <div class="row mytd d-flex">
+                <div class="col-sm-1"><p class="tddata pt-1">{{i.product}}</p></div>
+                <div class="col-sm-1"><p class="tddata pt-1">{{i.status}}</p></div>
+                <div class="col-sm-1"><p class="tddata pt-1">{{i.date_created}}</p></div>
+                <div class="col-sm-1"><p class="tddata pt-1">{{i.loc}}</p></div>
+                <div class="col-sm-1"><p class="tddata pt-1">{{i.appnum}}</p></div>
+                <div class="col-sm-1"><p class="tddata pt-1">{{i.appstatus}}</p></div>
+                <div class="col-sm-1"><p class="tddata pt-1">{{i.agreebtn}}</p></div>
+                <div class="col-sm-1"><p class="tddata pt-1">{{i.agreewayleave}}</p></div>
+                <div class="col-sm-1"><p class="tddata pt-1 d-none">{{i.appcontrol}}</p></div>
+                <div class="col-sm-1 dropleft pt-2"><a class="ml-4" href="{% url 'delete' i.id %}" role="button"><img class="img-fluid" src="../../../static/imgs/xicon.svg" alt="image"></a>
+                </div>
+            </div>
+           {% endfor%}
+
+            <div class="buttominfo d-flex ml-auto">
+                <div class="navbtns ml-auto d-flex">
+                    <p class="tddata pl-2">End of results</p>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+    </div>
+</div>
+
+<script> //Add new Product button handler 
+    $("#addnewpbtn").click(function(e) {
+      e.preventDefault();
+      $(".addproductsform").css("display", "block");
+      $("#addnewpbtn").css("display", "none");
+      $(".addpsbtn").css("display", "none");
+      $(".productinfo").css("display", "block");
+    });
+</script>
+<script> //Saved product now add form
+    $(".btnsave").click(function(e) {
+      e.preventDefault();
+      $(".addproductsform").css("display", "none");
+      $("#addnewpbtn").css("display", "inline");
+      $(".addpsbtn").css("display", "block");
+      $(".productinfo").css("display", "none");
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $("#submitBtn").click(function(){
+            $("#myForm").submit(); // Submit the form
+        });
+    });
+</script>
+<script type="text/javascript" src="../../../static/js/utmconv.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+        window.onload = function() {
+          getLocation();
+        };
+        var x = document.getElementById("demo");
+        var y = document.getElementById("appid");
+
+        function getLocation() {
+
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+        
+        function makeid(length) {
+           var result           = '';
+           var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+           var charactersLength = characters.length;
+           for ( var i = 0; i < length; i++ ) {
+              result += characters.charAt(Math.floor(Math.random() * charactersLength));
+           }
+           return result;
+        };
+
+        
+        
+        function makeref(){
+            var apptype = String($( "#categories option:selected" ).text()).substring(0,1);
+            console.log(apptype);
+            var areacode = $("#customervcode").text();
+            var d = new Date();
+            var appyear = d.getFullYear();
+            
+            //Months Formarting
+            var premonth = d.getMonth();
+            if(String(premonth).length>=2){
+                var appmonth = String(premonth);
+            }else{
+                var str1 = "0";
+                var appmonth = str1.concat(String(premonth));
+            }
+            
+            //Job sequence number formatting
+            var prejobseq = Math.floor(Math.random() * 1000) + 1;
+            if(String(prejobseq).length==1){
+                var str1 = "000";
+                var jobseqnum = str1.concat(String(prejobseq));
+            }
+            else if(String(prejobseq).length==2){
+                var str1 = "00";
+                var jobseqnum = str1.concat(String(prejobseq));
+            }
+            else if(String(prejobseq).length==3){
+                var str1 = "0";
+                var jobseqnum = str1.concat(String(prejobseq));
+            }
+            else{
+                var jobseqnum = String(prejobseq);
+            }
+            
+            
+            var refnum = apptype+String(areacode)+String(appyear)+appmonth+String(jobseqnum);
+            return refnum;
+        };
+        
+        function hasValue(elem) {
+            return $(elem).filter(function() { return $(this).val(); }).length > 0;
+        };
+        
+        function truncate(n) {
+            return n > 0 ? Math.floor(n) : Math.ceil(n);
+        };
+
+        let getDMS = function (dd, longOrLat) {
+            let hemisphere = /^[WE]|(?:lon)/i.test(longOrLat)
+            ? dd < 0
+              ? "W"
+              : "E"
+            : dd < 0
+              ? "S"
+              : "N";
+
+            const absDD = Math.abs(dd);
+            const degrees = truncate(absDD);
+            const minutes = truncate((absDD - degrees) * 60);
+            const seconds = ((absDD - degrees - minutes / 60) * Math.pow(60, 2)).toFixed(2);
+
+            let dmsArray = [degrees, minutes, seconds, hemisphere];
+            return `${dmsArray[0]},${dmsArray[1]},${dmsArray[2]}, ${dmsArray[3]}`;
+        };
+        
+        
+        
+        
+
+        function showPosition(position) {
+          let latDMS = getDMS(position.coords.latitude, 'lat'); 
+          let lonDMS = getDMS(position.coords.longitude, 'long');
+            
+          //console.log('latDMS: '+ String(latDMS).split(","));
+          //console.log('lonDMS: '+ String(lonDMS).split(","));
+          var latdm = String(latDMS).split(",");
+          var londm = String(lonDMS).split(",");
+          console.log(londm);
+          var latdir = latdm[3];
+          var latdeg = latdm[0];
+          var latmin = latdm[1];
+          var lngdir = londm[3];
+          var lngdeg = londm[0];
+          var lngmin = londm[1];
+        
+            
+          var degmin = new UTMConv.DegMinCoords(latdir, latdeg, latmin, lngdir, lngdeg, lngmin, "wgs84");
+          var utm = degmin.to_utm()
+          //console.log(String(position.coords.latitude+","+position.coords.longitude).split(","));
+          $("#exampleFormControlInput1").val("UTM Zone = " + utm.utmz + " Easting = " + utm.easting + " Northing = " + utm.northing);
+            
+          //$("#id_order_set-0-maplatlon").val(String(position.coords.latitude+","+position.coords.longitude));
+          if(!hasValue("#exampleFormControlInput2")){
+              $("#exampleFormControlInput2").val(makeref());
+          }else if(String($("#exampleFormControlInput2").val()).substring(0,1)=="-") {
+              $("#exampleFormControlInput2").val(makeref());
+          }
+          
+          
+          //$("#id_order_set-0-appnum").val(makeref());
+        };
+        
+    </script>
+<script>
+$(document).ready(function(){
+    // Get value on button click and show alert
+    $("#saveproductbtn").click(function(){
+        var productformnum = document.getElementById('tbordercounter').innerHTML;
+        var inputid = "#id_order_set-"+productformnum+"-";
+        $(inputid.concat("product")).val($( "#categories option:selected" ).val());
+        $(inputid.concat("status")).val($( "#plans option:selected" ).val());
+        $(inputid+"loc").val($("#exampleFormControlInput1").val());
+        $(inputid+"appnum").val($("#exampleFormControlInput2").val());
+        $(inputid.concat("agreebtn")).val($( "#supplysel option:selected" ).val());
+        $(inputid.concat("agreewayleave")).val($( "#waylsel option:selected" ).val());
+
+        $("#productformsubmit").click(); 
+    });
+});
+</script>
+<script>
+    $(document).ready(function(){
+
+        $("#categories").change(function(){
+          $("#exampleFormControlInput2").val(makeref());
+          //$('[name=order_set-0-appstatus]').val("Under Review");//To select Blue
+        });
+    });
+</script>
+
+<script>
+$(document).ready(function(){
+    // Get value on button click and show alert
+    $("#hideshow").click(function(){
+        console.log("r");
+        var cstatus = $("#hideform").text();
+        if(cstatus==="Hide") {
+            if($(window).width()>=410) {
+                $(".leftcontainer").css("margin-left", "-64%");
+            }else if($(window).width()<375) {
+                $(".leftcontainer").css("margin-left", "-74%");
+            }
+            else{
+                $(".leftcontainer").css("margin-left", "-70%");
+            }
+            
+            $(".leftcontainer").css("transition", "0.75s ease-in-out");
+            $("#hideform").text("Show");
+        }else {
+            $(".leftcontainer").css("margin-left", "0%");
+            $(".leftcontainer").css("transition", "0.75s ease-in-out");
+            $("#hideform").text("Hide");
+        }
+
+        //$("#productformsubmit").click(); 
+    });
+});
+</script>
+{% endblock content %}

@@ -1,0 +1,363 @@
+/*Custom CSS*/
+@font-face {
+    font-family: "aleo-regular-webfont";
+    src: url("fonts/aleo-regular-webfont.ttf");
+}
+
+body {
+    position: relative;
+    font-family: aleo-regular-webfont;
+}
+
+.starter-template {
+    padding: -2rem 1.5rem;
+    text-align: center;
+}
+
+
+
+/*Nav bar*/
+.navbar-brand img{
+    height: 36px;
+    width: 155px;
+    border-radius: 10px;
+}
+
+.bg-darkv{
+    background: #299E98;
+}
+
+.logoutdetails{
+    display: flex;
+}
+
+.location{
+    height: 64px;
+    background: #fafafa;
+    border-radius: 35px;
+    color: #21242B;
+}
+
+
+.navbar {
+    background: #ffff;
+}
+
+.nav-link{
+    color: #21242B;
+}
+.pimg{
+    width: 1px;
+    height: 3px;
+}
+
+.nav-link:hover{
+    background: #fafafa;
+    border-radius: 25px;
+    color: #21242B;
+}
+.lastlink{
+    height: 43px;
+    background: #299E98;
+    border-radius: 39px;
+    color: #ffffff;
+    font-size: 18px;
+    width: 82px;
+}
+
+.logoutbtn{
+    height: 43px;
+    background: #299E98;
+    border-radius: 39px;
+    color: #ffffff;
+    font-size: 18px;
+    width: 82px;
+    border: 1px solid #299E98;
+}
+
+.logoutbtn:hover{
+    height: 43px;
+    background: #397d7a;
+    border-radius: 39px;
+    color: #ffffff;
+    font-size: 18px;
+    width: 82px;
+    border: 1px solid #299E98;
+}
+
+.lastlink:hover{
+    height: 43px;
+    background: #299E98;
+    border-radius: 39px;
+    color: #ffffff;
+    font-size: 18px;
+    width: 82px;
+}
+.ls{
+    background: #ffffff;
+    border-radius: 39px;
+    color: #ffffff;
+        padding-top: 0px;
+}
+.ls:hover{
+    background: #ffffff;
+    border-radius: 39px;
+    color: #ffffff;
+    padding-top: 0px;
+}
+
+}
+.active{
+    background: #fafafa;
+    border-radius: 25px;
+    color: #21242B;
+}
+
+
+/*Home page*/
+#homepage{
+    background: #F9F8FD;
+    height: 489px;
+}
+
+.intro{
+    margin-top: 19%;
+    text-align: start;
+    margin-left: 12%;
+}
+.abtn{
+    background-color: #299E98;
+    color: #ffffff;
+    border-radius: 25px;
+    border: 2px solid #299E98;
+    width: 25%;
+    height: 49px;
+}
+
+/*Profile*/
+#phomepage{
+    background: #Fafafa;
+    height: auto;
+}
+
+.savebtn{
+    margin-left: 185px;
+    margin-bottom: 10px;
+}
+
+.profile{
+    background: #ffffff;
+    border: 1px solid #9a9a9a38;
+    border-radius: 40px;
+    width: 65%;
+}
+.detailslabels{
+    display: flex;
+}
+
+.dip img{
+    height: 120px;
+    width: 120px;
+
+}
+.pdetails{
+    display: block;
+    margin-left: 30px;
+}
+
+.label2{
+    text-align: end;
+    padding-left: 120px;
+    font-weight: bold;
+}
+
+.appdetails{
+    background: #ffffff;
+    border: 1px solid #9a9a9a38;
+    border-radius: 40px;
+    width: 100%;
+    margin-left: -132px;
+}
+
+.appdeatilshead{
+    text-align: left;
+}
+
+.allappsdetails{
+    padding-top: 220px;
+}
+
+.newappbtn{
+    background-color: #299E98;
+    border-color: #17a2b8;
+}
+.newappbtn:hover{
+    background-color: #288a85;
+    border-color: #17a2b8;
+}
+
+.newinfobtn{
+    background-color: #299E98;
+    border-color: #17a2b8;
+}
+
+.newinfobtn:hover{
+    background-color: #288a85;
+    border-color: #17a2b8;
+}
+
+/*Oder form*/
+.form1{
+    background: white;
+    padding: 20px;
+}
+
+/*DASHBOARD*/
+.totalorders{
+    background: #299E98;
+    border-radius: 10px;
+}
+
+.simobtn{
+    background: #299E98;
+    color: #ffffff;
+    width: max-content;
+}
+
+.simobtn:hover{
+    background: #288a85;
+    color: #ffffff;
+    width: max-content;
+}
+
+.ordersrow{
+    background: #ffffff;
+    border-radius: 25px;
+}
+
+
+/*New Job*/
+#njhomepage{
+    background: #fafafa;
+}
+
+.appstate{
+    display: flex;
+}
+
+.njlabel{
+    color: #299E98;
+    border-bottom: 1px solid #299E98;
+}
+.djlabel{
+    border-bottom: 1px solid #9a9a9a38;
+}
+
+.columnlabels{
+    display: flex;
+    color: #299E98;
+}
+
+.jobs{
+    display: block;
+}
+
+.job{
+    display: flex;
+}
+.cusid{
+    margin-right: 86px;
+}
+.refnum{
+    margin-right: 58px;
+}
+.location{
+    margin-right: 35px;
+}
+.dateapplied{
+    margin-right: 55px;
+}
+.jobstatus{
+    margin-right: 40px;
+}
+
+.jobbtn{
+    background-color: #299E98;
+    border: 2px solid #299E98;
+    border-radius: 25px;
+    width: auto;
+    height: 35px;
+    color: #ffffff;
+}
+
+.appintro{
+    margin-top: 10%;
+    text-align: start;
+    margin-left: 7%;
+    margin-right: 20%;
+}
+
+.jobs{
+    background: #ffffff;
+    border: 1px solid #9a9a9a38;
+    border-radius: 25px;
+    width: auto;
+    padding: 25px;
+}
+
+
+/*Login*/
+.regtext{
+    text-align: left;
+    margin-left: 6%;
+}
+.wlcm{
+    font-weight: bolder;
+    font-size: 56px;
+}
+#lihomepage .profile{
+    padding: 25px;
+}
+
+.submitbtn{
+    width: 100%;
+    background-color: #299E98;
+    color: #ffffff;
+}
+
+.opt2{
+    display: flex;
+    margin-left: 97px;
+}
+.opt2 a{
+    font-size: 15px;
+    color: #299E98;
+}
+.loglogo{
+    text-align: center;
+}
+
+/*footer*/
+#footer{
+    background: #fafafa;
+}
+.row1{
+    margin: 37px;
+}
+.lastrow{
+    margin: 37px;
+}
+.contacts{
+    display: block;
+}
+.sc1, .sc2, .sc3{
+    display: flex;
+}
+.links{
+    margin-left: 36%;
+    color: #21242B;
+}
+#footer a{
+    color: #21242B;
+}
+

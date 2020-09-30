@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Welcome to my Resturant  dolor at maximus ornare, nunc risus facilisis nisl, ac hendrerit massa eros eget augue. Nullam aliquet rutrum quam, eget suscipit nulla porttitor a. Donec est neque, mollis id feugiat ac, varius et erat. Fusce ut elit a metus tempor euismod ">
+    <link rel="icon" href="../../../static/imgs/favicon.svg">
+
+    <title>KPLC | Welcome</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    
+    <!--Custom CSS-->
+    <link href="../../../static/css/custom.css" rel="stylesheet">
+    
+    <!--fontawesome CSS-->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <style>
+        
+        body {
+            overflow-x: hidden;
+        }
+    /* Extra small devices (phones, 600px and down) */
+    @media only screen and (max-width: 600px) {
+        .hpleftpic {
+            display: none;
+        }
+        
+        .abtn {
+            width: 35%;
+        }
+        
+        .intro {
+            margin-top: 15%;
+            text-align: start;
+            margin-left: 2%;
+            padding: 27px;
+        }
+        
+        .row1 {
+            display: none;
+        }
+
+    }
+
+    /* Small devices (portrait tablets and large phones, 600px and up) */
+    @media only screen and (min-width: 600px) and (max-width: 768px) {
+
+    }
+    </style>
+    
+    
+    
+</head>
+
+    
+<body data-spy="scroll" data-target="#navbarsExampleDefault">
+    <section id="landing">
+        <nav class="navbar navbar-expand-md fixed-top">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#"><img src="../../../static/imgs/logo.svg" class="img-fluid" alt=""></a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><img class="img-fluid" src="../../../static/imgs/menuicon.svg" alt="image"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item mr-3 mt-3">
+                    <a class="nav-link active" href="{% url 'user' %}">Home</a>
+                  </li>
+                    <li class="nav-item mr-3 mt-3">
+                       {% for i in userid %}
+                        <a class="nav-link" href="{% url 'qoutations' i %}">Qoutations &amp; Payments</a>
+                       {% endfor %}
+                    </li>
+                      <li class="nav-item mr-3 mt-3">
+                       {% for i in userid %}
+                        <a class="nav-link active" href="{% url 'create_app' i %}">Applications</a>
+                       {% endfor %}
+                      </li>
+                   <li class="nav-item mr-3 mt-3">
+                       {% for i in userid %}
+                        <a class="nav-link" href="{% url 'customer' i %}">Profile</a>
+                       {% endfor %}
+                   </li>
+                   <li class="nav-item mr-3 mt-3 pt-2">
+                    <p>Hello, {{request.user}}</p>
+                   </li>
+                   <li class="nav-item mr-3 mt-3">
+                    <a class="btn btn-primary btn-md logoutbtn" href="{% url 'logout' %}" role="button">logout</a>
+                   </li>
+                </ul>
+              </div>
+           </div>
+        </nav>
+    </section>
+    <section id="homepage">
+        <div class="row text-center pb-5">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 p-1">
+                <div class="intro">
+                  <h1 class="text-lg">Helping you you get Electricity to your home the easiest way possible.</h1>
+                  <p class="pb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rutrum tempus leo  Pellentesque finibus nisi nisl, id.</p>
+                  <div class="mainbtns">
+                    <a href="#"><button type="button" class="abtn">Apply Now</button></a>
+                  </div>
+                </div>
+            </div>
+            <div class="col-0 col-sm-0 col-md-6 col-lg-6 pt-4 hpleftpic">
+                <img src="../../../static/imgs/hpleftpic.svg" class="img-fluid" alt="">
+            </div>
+        </div>
+    </section>
+    
+      <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div>
+                <h3>Sign in</h3>
+            </div>
+        <form action="" method="POST">
+            {% csrf_token %}
+           <div class="form-group">
+               <label for="exampleInputEmail1">Email address</label>
+               <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="username">
+               <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+           </div>
+           <div class="form-group">
+               <label for="exampleInputPassword1">Password</label>
+               <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+           </div>
+            <input type="submit" class="btn btn-primary" value="Submit">
+            <p>Dont have an account?</p><a href="{% url 'register' %}">Register Now</a>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+    
+    <section id="process">
+        <div class="container pt-5 pb-5 ml-4">
+            <h1 class="text-center">How we work</h1>
+            <div class="row pt-5">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 mb-4">
+                    <img src="../../../static/imgs/p1.svg" class="img-fluid" alt="team">
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 mb-4">
+                    <img src="../../../static/imgs/p2.svg" class="img-fluid" alt="team">
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 mb-4">
+                    <img src="../../../static/imgs/p3.svg" class="img-fluid" alt="team">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+       
+    <section id="footer">
+        <div class="container-fluid">
+            <div class="row pt-4 row1">
+                <div class="blogo col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <img src="../../../static/imgs/logo.svg" class="img-fluid pb-3 btmlogo" alt="">
+                    <p style="font-size: 14px;color: #0d0c22;" class="fdes">Lorem ipsum dolor sit amet, consectetur adipiscing .</p>
+                    <div class="socials"><a href="https://www.instagram.com/cognition_smart/"><img src="../../../static/imgs/Instagram.svg" class="img-fluid pr-4" alt=""></a><a><img src="../../../static/imgs/faceb.svg" class="img-fluid pr-4" alt=""></a><a><img src="../../../static/imgs/twt.svg" class="img-fluid" alt=""></a></div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                    <h4 class="pb-2">Quick Links</h4>
+                    <div class="links">
+                        <a class="start" href="#">Apply Now</a><br>
+                        <a href="#services">Application Status</a><br>
+                        <a href="#plans">Qoutations &amp; Payments</a><br>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 contacts pl-5">
+                    <h4 class="pb-2">Contact Us</h4>
+                    <div class="sc1"><img class="mb-3" src="../../../static/imgs/emailicon.svg"><p class="ml-3">info@kplc.com</p></div>
+                    <div class="sc2"><img class="mb-3" src="../../../static/imgs/callicon.svg"><p class="ml-3">+56 6536 6435</p></div>
+                    <div class="sc3"><img class="mb-3" src="../../../static/imgs/fbicon.svg"><p class="ml-3">KPLC</p></div>
+                </div>
+            </div>
+            <hr class="">
+            <div class="row lastrow">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <p class="hide1">© 2020 KPLC. All right reserved.</p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 pr-3 pl-5 text-center credit">
+                    <p>Designed and developed by KPLC</p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                    <p class="hide3">Some info</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script async src="https://www.youtube.com/iframe_api"></script>
+    <script src="../../../static/js/script.js"></script>
+    <!--Smooth scroll-->
+    <script src="../../../static/js/smooth-scroll.js"></script>
+    <script src="../../../static/js/jquery.vide.js"></script>
+    <script>
+	   var scroll = new SmoothScroll('a[href*="#"]');
+    </script>
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();   
+    });
+    $("a[rel=popover]")
+    .click(function(e) {
+        e.preventDefault()
+    });
+    </script>
+
+<script>
+$(document).ready(function(){
+
+    // hide #back-top first
+$("#back-top").hide();
+
+// fade in #back-top
+$(function () {
+    $(window).scroll(function () {
+    if ($(this).scrollTop() > 100) {
+    $('#back-top').fadeIn();
+    } else {
+    $('#back-top').fadeOut();
+    }
+    });
+
+    // scroll body to 0px on click
+    $('#back-top a').click(function () {
+    $('body,html').animate({
+    scrollTop: 0}, 200);
+    return false;
+    });
+    });
+
+});
+</script>
+<script>
+    window.onload = function() {
+      getLocation();
+    };
+    var x = document.getElementById("demo");
+
+    function getLocation() {
+        
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    function showPosition(position) {
+      x.textContent = "La" + position.coords.latitude + 
+      "Lo" + position.coords.longitude;
+    }
+    
+</script>
+</body>
+</html>

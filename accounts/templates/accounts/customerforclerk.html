@@ -1,0 +1,96 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+
+<nav class="navbar navbar-expand-md fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="../../../static/imgs/logo.svg" class="img-fluid" alt=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-3 mt-3">
+            <a id="go-back" class="nav-link active">Dashboard</a>
+          </li>
+           <li class="nav-item mr-3 mt-3">
+               {% for i in userid %}
+                <a class="nav-link" href="{% url 'customer' i %}">Profile</a>
+               {% endfor %}
+           </li>
+           <li class="nav-item mr-3 mt-3 pt-2">
+            <p>Hello, {{request.user}}</p>
+           </li>
+           <li class="nav-item mr-3 mt-3">
+            <a class="btn btn-primary btn-md logoutbtn" href="{% url 'logout' %}" role="button">logout</a>
+           </li>
+        </ul>
+      </div>
+   </div>
+</nav>
+<br>
+<br>
+<br>
+<br>
+
+
+<section id="info pt-4">
+    <div class="container">
+        
+        <div class="row p-3">
+            <div class="col-md-4 col-lg-4">
+                <div class="pinfo p-4">
+                    <h4>Personal Info</h4>
+                    <hr>
+                    <p><span class="font-weight-bold">Name: </span>{{customer.name}}</p>
+                    <p><span class="font-weight-bold">Middle Name: </span>{{customer.middlename}}</p>
+                    <p><span class="font-weight-bold">Last Name: </span>{{customer.lastname}}</p>
+                    <p><span class="font-weight-bold">ID Type: </span>{{customer.idtype}}</p>
+                    <p><span class="font-weight-bold">ID Number: </span>{{customer.idnum}}</p>
+                    <h4>Demographics</h4>
+                    <hr>
+                    <p><span class="font-weight-bold">Country: </span>{{customer.country}}</p>
+                    <p><span class="font-weight-bold">Personal Identification No.: </span>{{customer.pin}}</p>
+                    <p><span class="font-weight-bold">PO Box: </span>{{customer.pobox}}</p>
+                    <p><span class="font-weight-bold">Town: </span>{{customer.town}}</p>
+                    <p><span class="font-weight-bold">Constituency: </span>{{customer.constituency}}</p>
+                    <p><span class="font-weight-bold">Ward: </span>{{customer.ward}}</p>
+                    <p><span class="font-weight-bold">LR No: </span>{{customer.lr_no}}</p>
+                    <p><span class="font-weight-bold">Estate/Village: </span>{{customer.estate_village}}</p>
+                    <p><span class="font-weight-bold">Duplicate: </span>{{customer.duplicate}}</p>
+                    <p><span class="font-weight-bold">Vertical Code: </span>{{customer.vcode}}</p>
+                    <p><span class="font-weight-bold">Customer Contact Person:</span> {{customer.ccp}}</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class="pinfo p-4">
+                    <h4>Supply Info</h4>
+                    <hr>
+                    <p><span class="font-weight-bold">Voltage: </span>{{customer.voltage}}</p>
+                    <p><span class="font-weight-bold">Connection Type: </span>{{customer.connetype}}</p>
+                    <p><span class="font-weight-bold">Connection Date: </span>{{customer.connedate}}</p>
+                    <p><span class="font-weight-bold">Authorised Max Demand: </span>{{customer.amd}}</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class="pinfo p-4">
+                    <h4>Documents</h4>
+                    <hr>
+                    <p><span class="font-weight-bold">ID Copy </span><br><a href="/imgs/{{customer.profile_pic}}" class="text-info">View ID</a></p>
+                    <p><span class="font-weight-bold">Pin Certificate Copy  </span><br><a href="/imgs/{{customer.pincertificate}}" class="text-info">View Pin Certificate</a></p>
+                    <p><span class="font-weight-bold">Deed Title Copy  </span><br><a href="/imgs/{{customer.td}}" class="text-info">View Title Deed</a></p>
+                    <p><span class="font-weight-bold">Wiring certificate  </span><br><a href="/imgs/{{customer.wc}}" class="text-info">View Wiring Certificate</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+document.getElementById('go-back').addEventListener('click', () => {
+  history.back();
+});
+</script>
+
+{% endblock content %}
+

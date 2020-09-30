@@ -1,0 +1,630 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<style>
+    
+    body {
+        overflow-x: hidden;
+    }
+    .form1 {
+        width: auto;
+        justify-content: center;
+        border-radius: 10px;
+    }
+    
+    .btn {
+        margin-top: -84px;
+    }
+    
+    /* CSS REQUIRED */
+    .state-icon {
+        left: -5px;
+    }
+    .list-group-item-primary {
+        color: rgb(255, 255, 255);
+        background-color: rgb(66, 139, 202);
+    }
+
+    /* DEMO ONLY - REMOVES UNWANTED MARGIN */
+    .well .list-group {
+        margin-bottom: 0px;
+    }
+    
+
+    
+    
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .simobtn {
+        width: 100%;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {...}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {...}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...}
+    
+
+</style>
+    <p class="d-none" id="customervcode">{{customer.vcode}}</p>
+    <div class="addnewappbtn" style="margin-left: 78%;">
+        <a class="btn btn-primary btn-lg mr-auto d-none" href="#" role="button">New Application</a>
+    </div>
+    <div class="container pt-5">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                
+                {% ifequal forloop.counter0 0 %}
+                    <div class="form1 appform1 d-block mx-auto">
+                    <h3 class="pb-0">Application form</h3>
+                    <p class="saf">1/We the undersigned owner/tenant/occupier of the premises stated under the title of supply data agree with the
+company to take a supply of Electrical energy at the mentioned premises to all the lamps, apparatus and motors
+installed not exceeding the KVA stated in the item And (KVA) and in respect of any variation I/We agree to notify the
+company under the Methods of Charge contained in the Methods of Charge (Kenya Power) Byelaws 19............. as amended
+from time to time or in any Byelaws substituted therefore and as specified below'and!
+<br><br>
+We herehy agree: .
+<br><br>
+a) To pay the charges for such supply from time to time as published by the Company pursuit to Section 73 of the
+Electric Power Act.
+<br><br>
+b) That the provisions of and conditions contained in the supply Contract and Conditions (EAP&amp;L) Byelaws 1953 as
+ammended from time to time shall be the basis of and form part of my/our contract with the Company
+<br><br>
+c) To allow authourised Kenya Power personnel entry into the premises of supply for purposes of reading the meter, and
+inspecting the installation to ascertain that the same is in a good working order.
+<br><br>
+d) To avoid any kind of meter damage and/or meter tampering so as to avoid unauthorised/fraudulent use of electricity.
+The maximum demand of this supply will not exceed the KVA stated in the item AMD (KVA)withouth the written consent
+of the company.
+<br><br>
+The methods of charge are specified in Methods of Charge (Kenya Power) Byelaws 19............. as amended from time to time
+<br><br>
+or in any Byelaws substituted therefore, and the prices are published in the Company's Schedule of “Prices for
+- Electrical Suppliés in Kenya”.
+<br><br>
+For and on behalf of the customer.
+
+We undertake to supply above subject to the provisions of Electric Power At and all Rules and Byelaws from time to
+time to in force thereunder.
+
+For and on behalf of
+KENYA POWER
+<br><br>
+Choose "Yes I agree" below to confirm and Submit.</p>
+                    <p class="waf">I/We {{customer.name}} being the proprietor of parcel of land comprised in
+Title No {{customer.housenum}} hereby consent to The Kenya Power laying or erecting an
+electric supply line on my side of land and from time to time entering upon and having access to my said piece of land for the
+purposes of constructing, laying, maintaining, using, removing and replacing the electric supply line.<br><br>
+I undertake not to interfere or permit any interference with the electric supply line nor to construct buildings, plant trees or dump
+waste materials beneath the electric supply line. I also undertake that this consent shall be irrevocable.<br><br>
+I have supplied copies of Title deed and Land search documents as proof of ownership.
+<br><br>
+Choose "Yes I agree" below to confirm and Submit.</p>
+                    {% for field in form %}
+                        <div class="labelform p-1">
+                            <!--<p class="m-1">{{field.label}}</p>-->
+                            {% with name="Loc" %} 
+                                {% ifequal field.label name %}
+                                    <p>Location</p>
+                                    {% render_field field class="form-control mr-2 loca" %}
+                                {% else %}
+                                    {% with name="Product" %}
+                                        {% ifequal field.label name %}
+                                            <p>Application type</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Status" %}
+                                        {% ifequal field.label name %}
+                                            <p>Plan</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Appnum" %}
+                                        {% ifequal field.label name %}
+                                            <p>Ref Number</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Appstatus" %}
+                                        {% ifequal field.label name %}
+                                            <p>Application Status</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% render_field field class="form-control mr-2" %}
+                                {% endifequal %}
+                            {% endwith %}                 
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endifequal %}
+                {% ifequal forloop.counter0 1 %}
+                    <div class="form1 appform2 d-none mx-auto">
+                    <h3 class="pb-1">Application form</h3>
+                    {% for field in form %}
+                        <div class="labelform p-1">
+                            <!--<p class="m-1">{{field.label}}</p>-->
+                            {% with name="Loc" %} 
+                                {% ifequal field.label name %}
+                                    <p>Location</p>
+                                    {% render_field field class="form-control mr-2 loca" %}
+                                {% else %}
+                                    {% with name="Product" %}
+                                        {% ifequal field.label name %}
+                                            <p>Application type</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Status" %}
+                                        {% ifequal field.label name %}
+                                            <p>Plan</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Appnum" %}
+                                        {% ifequal field.label name %}
+                                            <p>Ref Number</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Appstatus" %}
+                                        {% ifequal field.label name %}
+                                            <p>Application Status</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% render_field field class="form-control mr-2" %}
+                                {% endifequal %}
+                            {% endwith %}                 
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endifequal %}
+            
+                {% ifequal forloop.counter0 2 %}
+                    <div class="form1 appform3 d-none mx-auto">
+                    <h3 class="pb-1">Application form</h3>
+                    {% for field in form %}
+                        <div class="labelform p-1">
+                            <!--<p class="m-1">{{field.label}}</p>-->
+                            {% with name="Loc" %} 
+                                {% ifequal field.label name %}
+                                    <p>Location</p>
+                                    {% render_field field class="form-control mr-2 loca" %}
+                                {% else %}
+                                    {% with name="Product" %}
+                                        {% ifequal field.label name %}
+                                            <p>Application type</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Status" %}
+                                        {% ifequal field.label name %}
+                                            <p>Plan</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Appnum" %}
+                                        {% ifequal field.label name %}
+                                            <p>Ref Number</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Appstatus" %}
+                                        {% ifequal field.label name %}
+                                            <p>Application Status</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% render_field field class="form-control mr-2" %}
+                                {% endifequal %}
+                            {% endwith %}                 
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endifequal %}
+            
+                {% ifequal forloop.counter0 3 %}
+                    <div class="form1 appform4 d-none mx-auto">
+                    <h3 class="pb-4">Application form</h3>
+                    {% for field in form %}
+                        <div class="labelform p-1">
+                            <!--<p class="m-1">{{field.label}}</p>-->
+                            {% with name="Loc" %} 
+                                {% ifequal field.label name %}
+                                    <p>Location</p>
+                                    {% render_field field class="form-control mr-2 loca" %}
+                                {% else %}
+                                    {% with name="Product" %}
+                                        {% ifequal field.label name %}
+                                            <p>Application type</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Status" %}
+                                        {% ifequal field.label name %}
+                                            <p>Plan</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Appnum" %}
+                                        {% ifequal field.label name %}
+                                            <p>Ref Number</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Appstatus" %}
+                                        {% ifequal field.label name %}
+                                            <p>Application Status</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% render_field field class="form-control mr-2" %}
+                                {% endifequal %}
+                            {% endwith %}                 
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endifequal %}    
+
+                {% ifequal forloop.counter0 4 %}
+                    <div class="form1 appform5 d-none mx-auto">
+                    <h3 class="pb-4">Application form</h3>
+                    {% for field in form %}
+                        <div class="labelform p-1">
+                            <!--<p class="m-1">{{field.label}}</p>-->
+                            {% with name="Loc" %} 
+                                {% ifequal field.label name %}
+                                    <p>Location</p>
+                                    {% render_field field class="form-control mr-2 loca" %}
+                                {% else %}
+                                    {% with name="Product" %}
+                                        {% ifequal field.label name %}
+                                            <p>Application type</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Status" %}
+                                        {% ifequal field.label name %}
+                                            <p>Plan</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Appnum" %}
+                                        {% ifequal field.label name %}
+                                            <p>Ref Number</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% with name="Appstatus" %}
+                                        {% ifequal field.label name %}
+                                            <p>Application Status</p>
+                                        {% endifequal %}
+                                    {% endwith %}
+                                    {% render_field field class="form-control mr-2" %}
+                                {% endifequal %}
+                            {% endwith %}                 
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endifequal %}
+            
+            <br>
+            {% endfor %}
+            <button type="submit" class="btn simobtn btn-lg mb-5" id="submitBtn">Submit</button>
+        </form>
+<!--
+            <div class="well" style="max-height: 300px;overflow: auto;">
+            	<ul class="list-group checked-list-box">
+                  <li class="list-group-item" data-style="button">Cras justo odio</li>
+                  <li class="list-group-item" data-color="success">Dapibus ac facilisis in</li>
+                  <li class="list-group-item" data-style="button" data-color="info">Morbi leo risus</li>
+                  <li class="list-group-item" data-color="warning">Porta ac consectetur ac</li>
+                  <li class="list-group-item" data-style="button" data-color="danger">Vestibulum at eros</li>
+                </ul>
+            </div>
+-->
+    </div>
+    <script type="text/javascript" src="../../../static/js/utmconv.js"></script>
+    <script>
+        window.onload = function() {
+          getLocation();
+          MakeQoutes();
+        };
+        var x = document.getElementById("demo");
+        var y = document.getElementById("appid");
+
+        function getLocation() {
+
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+        
+        function makeid(length) {
+           var result           = '';
+           var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+           var charactersLength = characters.length;
+           for ( var i = 0; i < length; i++ ) {
+              result += characters.charAt(Math.floor(Math.random() * charactersLength));
+           }
+           return result;
+        };
+
+        
+        
+        function makeref(){
+            var apptype = String($("#id_order_set-0-product").find(":selected").text()).substring(0,1);
+            var areacode = $("#customervcode").text();
+            var d = new Date();
+            var appyear = d.getFullYear();
+            
+            //Months Formarting
+            var premonth = d.getMonth();
+            if(String(premonth).length>=2){
+                var appmonth = String(premonth);
+            }else{
+                var str1 = "0";
+                var appmonth = str1.concat(String(premonth));
+            }
+            
+            //Job sequence number formatting
+            var prejobseq = Math.floor(Math.random() * 1000) + 1;
+            if(String(prejobseq).length==1){
+                var str1 = "000";
+                var jobseqnum = str1.concat(String(prejobseq));
+            }
+            else if(String(prejobseq).length==2){
+                var str1 = "00";
+                var jobseqnum = str1.concat(String(prejobseq));
+            }
+            else if(String(prejobseq).length==3){
+                var str1 = "0";
+                var jobseqnum = str1.concat(String(prejobseq));
+            }
+            else{
+                var jobseqnum = String(prejobseq);
+            }
+            
+            
+            var refnum = apptype+String(areacode)+String(appyear)+appmonth+String(jobseqnum);
+            return refnum;
+        };
+        
+        function hasValue(elem) {
+            return $(elem).filter(function() { return $(this).val(); }).length > 0;
+        };
+        
+        function MakeQoutes() {
+            if(String(window.location.href).substring(22, 32)=="qoutations") {
+                $("h3").text("Qoutation");
+                $(".saf").css("display", "none");
+                $(".waf").css("display", "none");
+                $('input').attr('readonly', true); 
+                $("#id_order_set-0-qoutation").css("display", "none"); 
+                $("#submitBtn").css("display", "none");
+            }else if(String(window.location.href).substring(22, 38)=="supply_agreement") {
+                $("h3").text("Supply Agreement form");
+                $(".saf").css("display", "block");
+                $(".waf").css("display", "none");
+                $('input').attr('readonly', true);
+            }else if(String(window.location.href).substring(22, 40)=="wayleave_agreement") {
+                $("h3").text("Wayleaves Agreement form");
+                $(".saf").css("display", "none");
+                $(".waf").css("display", "block");
+                $('input').attr('readonly', true);
+            }else if(String(window.location.href).substring(22, 26)=="icms") {
+                $(".saf").css("display", "none");
+                $(".waf").css("display", "none");
+                $("h3").text("Upload Qoute");
+                $('input').attr('readonly', true);
+                $("#id_order_set-0-appstatus").val("Pending Payment"); //to be changed based on who's accessing orderform
+                //console.log(sendjobele.value); 
+                $("#id_order_set-0-appstatus").css("display","none");
+                $("p").css("display","none");
+                $('input').attr('readonly', true);
+                $('#id_order_set-0-qoutation').attr('readonly', false);
+            }else if(String(window.location.href).substring(22, 37)=="create_ordertwo") {
+                $(".saf").css("display", "none");
+                $(".waf").css("display", "none");
+                $("h3").text("Site Information");
+                $("#id_order_set-0-appstatus").css("display","none");
+                $("p").css("display","none");
+                var sendjobele = $("#id_order_set-0-appcontrol")[0];
+                sendjobele.value = "Send Job to Engineer";
+                $("#id_order_set-0-appstatus").val("Site Visited"); //to be changed based on who's accessing orderform
+                $('input').attr('readonly', true);
+                $('#id_order_set-0-siteinfo').attr('readonly', false);
+            }else if(String(window.location.href).substring(22, 39)=="create_orderthree") {
+                $("#id_order_set-0-appstatus").css("display","none");
+                $("p").css("display","none");
+                $(".saf").css("display", "none");
+                $(".waf").css("display", "none");
+                $('input').attr('readonly', true);
+                $("h3").text("Installation Note");
+                $("#id_order_set-0-appstatus").val("Installed"); //to be changed based on who's accessing orderform
+                $('#id_order_set-0-installnote').attr('readonly', false);
+            }else if(String(window.location.href).substring(22, 28)=="busdev") {
+                $("h3").text("Confirm Job Send");
+                $("p").css("display","none");
+                $("#id_order_set-0-appstatus").css("display","none");
+                $(".saf").css("display", "none");
+                $(".waf").css("display", "none");
+                $('input').attr('readonly', true);
+                var sendjobele = $("#id_order_set-0-appcontrol")[0];
+                sendjobele.value = "Send to InCMS and Designer";
+                $("#id_order_set-0-appstatus").val("On Design"); //to be changed based on who's accessing orderform
+            }else if(String(window.location.href).substring(22, 30)=="proposal") {
+                $("h3").text("Design Proposal");
+                $('input').attr('readonly', false);
+                $(".saf").css("display", "none");
+                $(".waf").css("display", "none");
+                $("#id_order_set-0-appstatus").val("Waiting for Qoute"); //to be changed based on who's accessing orderform
+                $("#id_order_set-0-appstatus").css("display","none");
+                $("p").css("display","none");
+            }else if(String(window.location.href).substring(22, 29)=="payment") {
+                $("h3").text("Submit Payment Proof");
+                $(".saf").css("display", "none");
+                $(".waf").css("display", "none");
+                $('input').attr('readonly', false); //
+                $("#id_order_set-0-payment").css("border","0px");
+            }
+            else{
+                $(".saf").css("display", "none");
+                $(".waf").css("display", "none");
+                $('input').attr('readonly', false);
+                $("#id_order_set-0-appstatus").css("display","none");
+                $("#id_order_set-0-maplatlon").css("display","none");
+                
+            }
+        };
+        
+        function truncate(n) {
+            return n > 0 ? Math.floor(n) : Math.ceil(n);
+        };
+
+        let getDMS = function (dd, longOrLat) {
+            let hemisphere = /^[WE]|(?:lon)/i.test(longOrLat)
+            ? dd < 0
+              ? "W"
+              : "E"
+            : dd < 0
+              ? "S"
+              : "N";
+
+            const absDD = Math.abs(dd);
+            const degrees = truncate(absDD);
+            const minutes = truncate((absDD - degrees) * 60);
+            const seconds = ((absDD - degrees - minutes / 60) * Math.pow(60, 2)).toFixed(2);
+
+            let dmsArray = [degrees, minutes, seconds, hemisphere];
+            return `${dmsArray[0]},${dmsArray[1]},${dmsArray[2]}, ${dmsArray[3]}`;
+        };
+        
+        
+        
+        
+
+        function showPosition(position) {
+          let latDMS = getDMS(position.coords.latitude, 'lat'); 
+          let lonDMS = getDMS(position.coords.longitude, 'long');
+            
+          //console.log('latDMS: '+ String(latDMS).split(","));
+          //console.log('lonDMS: '+ String(lonDMS).split(","));
+          var latdm = String(latDMS).split(",");
+          var londm = String(lonDMS).split(",");
+          console.log(londm);
+          var latdir = latdm[3];
+          var latdeg = latdm[0];
+          var latmin = latdm[1];
+          var lngdir = londm[3];
+          var lngdeg = londm[0];
+          var lngmin = londm[1];
+        
+            
+          var degmin = new UTMConv.DegMinCoords(latdir, latdeg, latmin, lngdir, lngdeg, lngmin, "wgs84");
+          var utm = degmin.to_utm()
+          //console.log(String(position.coords.latitude+","+position.coords.longitude).split(","));
+          $("#id_order_set-0-loc").val("UTM Zone = " + utm.utmz + " Easting = " + utm.easting + " Northing = " + utm.northing);
+            
+          $("#id_order_set-0-maplatlon").val(String(position.coords.latitude+","+position.coords.longitude));
+          if(!hasValue("#id_order_set-0-appnum")){
+              $("#id_order_set-0-appnum").val(makeref());
+          }else if(String($("#id_order_set-0-appnum").val()).substring(0,1)=="-") {
+              $("#id_order_set-0-appnum").val(makeref());
+          }
+          
+          
+          //$("#id_order_set-0-appnum").val(makeref());
+        };
+        
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            
+            $("#id_order_set-0-product").change(function(){
+              $("#id_order_set-0-appnum").val(makeref());
+              //$('[name=order_set-0-appstatus]').val("Under Review");//To select Blue
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('.list-group.checked-list-box .list-group-item').each(function () {
+
+                // Settings
+                var $widget = $(this),
+                    $checkbox = $('<input type="checkbox" class="hidden" />'),
+                    color = ($widget.data('color') ? $widget.data('color') : "primary"),
+                    style = ($widget.data('style') == "button" ? "btn-" : "list-group-item-"),
+                    settings = {
+                        on: {
+                            icon: 'glyphicon glyphicon-check'
+                        },
+                        off: {
+                            icon: 'glyphicon glyphicon-unchecked'
+                        }
+                    };
+
+                $widget.css('cursor', 'pointer')
+                $widget.append($checkbox);
+
+                // Event Handlers
+                $widget.on('click', function () {
+                    $checkbox.prop('checked', !$checkbox.is(':checked'));
+                    $checkbox.triggerHandler('change');
+                    updateDisplay();
+                });
+                $checkbox.on('change', function () {
+                    updateDisplay();
+                });
+
+
+                // Actions
+                function updateDisplay() {
+                    var isChecked = $checkbox.is(':checked');
+
+                    // Set the button's state
+                    $widget.data('state', (isChecked) ? "on" : "off");
+
+                    // Set the button's icon
+                    $widget.find('.state-icon')
+                        .removeClass()
+                        .addClass('state-icon ' + settings[$widget.data('state')].icon);
+
+                    // Update the button's color
+                    if (isChecked) {
+                        $widget.addClass(style + color + ' active');
+                    } else {
+                        $widget.removeClass(style + color + ' active');
+                    }
+                }
+
+                // Initialization
+                function init() {
+
+                    if ($widget.data('checked') == true) {
+                        $checkbox.prop('checked', !$checkbox.is(':checked'));
+                    }
+
+                    updateDisplay();
+
+                    // Inject the icon if applicable
+                    if ($widget.find('.state-icon').length == 0) {
+                        $widget.prepend('<span class="state-icon ' + settings[$widget.data('state')].icon + '"></span>');
+                    }
+                }
+                init();
+            });
+
+            $('#get-checked-data').on('click', function(event) {
+                event.preventDefault(); 
+                var checkedItems = {}, counter = 0;
+                $("#check-list-box li.active").each(function(idx, li) {
+                    checkedItems[counter] = $(li).text();
+                    counter++;
+                });
+                $('#display-json').html(JSON.stringify(checkedItems, null, '\t'));
+            });
+        });
+
+    </script>
+{% endblock content %}

@@ -1,0 +1,478 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+<style>
+    
+    body {
+        overflow-x: hidden;
+    }
+    
+    
+      #sidebar-wrapper {
+          padding-top: 5%;
+      }
+      
+      .plabel {
+        color: #B3BBBE;
+        font-size: 13px;
+      }
+      
+      .picplaceholder {
+          border: 2px dashed #B3BBBE;
+      }
+      
+      .uploadimgbtn {
+          background: transparent;
+          border-radius: 25px;
+          color: #7882F3;
+          border: 2px solid #D9DEFC;
+          font-size: 12px;
+          height: 34px;
+      }
+      
+      .uploadimgbtn:hover {
+          border: 2px solid #7882F3;
+          color: #7882F3;
+      }
+      
+      .deleteimgbtn {
+          background: transparent;
+          border-radius: 25px;
+          color: #D11A2A;
+          border: 2px solid #F0B5BB;
+          font-size: 12px;
+          height: 34px;
+      }
+      
+      .deleteimgbtn:hover {
+          border: 2px solid #D11A2A;
+          color: #D11A2A;
+      }
+      
+      
+      .productinfo, .productformbtns {
+          border-top: 2px solid #f6f6f9;
+          margin-top: 22px;
+          padding-top: 11%;
+      }
+      
+      
+      label, select {
+          display: block;
+          color: #0A0918;
+      }
+      
+      select {
+          background: #f6f6f9;
+          border-radius: 25px;
+          width: 100%;
+          padding: 7px;
+          border: none;
+          text-indent: 10px;
+          color: #0A0918;
+          
+      }
+      
+    input[type=text], input[type=number], input[type=email], input[type=password] {
+        border: none;
+        border-radius: 25px;
+        height: 35px;
+        text-indent: 3px;
+        background: #f6f6f9;
+        font-size: 15px;
+        width: 100%;
+        margin: 0px;
+
+    }
+      
+      .btnsave {
+          background: #7882F3;
+          border: 2px solid #7882F3;
+          border-radius: 35px;
+          height: 38px;
+          padding: 3px;
+          color: #ffffff;
+          width: 45%;
+      }
+      
+      .btnsave:hover {
+          color: #ffffff;
+          background: #6972d6;
+          border: 2px solid #6972d6;
+      }
+      
+      .btn-light {
+          color: #BFBFBF;
+          border-radius: 20px;
+      }
+
+    .tablebg {
+      background: #ffffff;
+      width: max-content;
+      padding: 30px;
+      border-radius: 20px;
+    }
+
+    .thdata {
+      font-size: 12px;
+
+    }
+    p {
+        12px;
+    }
+
+    .myth {
+      border-bottom: 2px solid #fafafa;
+    }
+
+    .buttominfo {
+      border-top: 2px solid #fafafa;
+      padding-top: 15px;
+    }
+
+    .tddata {
+      font-size: 12px;
+    }
+    
+    input[type=text], input[type=number], input[type=email], input[type=password], select {
+        border: none;
+        border-radius: 25px;
+        height: 35px;
+        text-indent: 3px;
+        background: #f6f6f9;
+        font-size: 15px;
+        width: 100%;
+        margin: 0px;
+
+    }
+    
+    .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #B3BBBE;
+      opacity: 0.8; /* Firefox */
+    }
+      
+      
+     ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #B3BBBE;
+      opacity: 0.8; /* Firefox */
+    }
+      
+      option, select {
+          font-size: 15px;
+          padding: 8px;
+      }
+      .filterlabel {
+          color: #B3BBBE;
+      }
+    
+    .thdata {
+        width: max-content;
+        text-align: start;
+    } 
+    
+    .applications {
+        max-width: max-content;
+    }
+    
+    #qoutations2 {
+        display: none;
+    }
+    
+    
+    
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    #qoutations2 {
+        display: block;
+    }
+    
+    #qoutations {
+        display: none;
+    }
+    
+    .filters {
+        width: 40%;
+    }
+    
+    .tablebg {
+        width: auto;
+        padding: 10px;
+    }
+    
+    .col-sm-1 {
+        width: 11%;
+    }
+    
+    .tddata {
+        font-size: 4.5px;
+    }
+    
+    .thdata {
+        font-size: 5px;
+    }
+    
+      option, select {
+          font-size: 8px;
+          padding: 5px;
+      }
+    
+    select {
+        height: 20px;
+        text-indent: 3px;
+        background: #f6f6f9;
+        width: 100%;
+        margin: 0px;
+        font-size: 8px;
+    }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {...}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {...}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...}
+      
+</style>
+
+
+<nav class="navbar navbar-expand-md fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="../../../static/imgs/logo.svg" class="img-fluid" alt=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><img class="img-fluid" src="../../../static/imgs/menuicon.svg" alt="image"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-3 mt-3">
+            <a class="nav-link active" href="{% url 'user' %}">Home</a>
+          </li>
+            <li class="nav-item mr-3 mt-3">
+                 <a class="nav-link" href="{% url 'qoutations' customer.id %}">Qoutations &amp; Payments</a>
+            </li>
+           <li class="nav-item mr-3 mt-3">
+               <a class="nav-link" href="">Profile</a>
+           </li>
+           <li class="nav-item mr-3 mt-3 pt-2">
+            <p>Hello, {{request.user}}</p>
+           </li>
+           <li class="nav-item mr-3 mt-3">
+            <a class="btn btn-primary btn-md logoutbtn" href="{% url 'logout' %}" role="button">logout</a>
+           </li>
+        </ul>
+      </div>
+   </div>
+</nav>
+<br>
+<br>
+<br>
+
+<div class="bigcontainer">
+    <div class="leftcontainer">
+        <h4 class="pl-4 pr-4 pt-2">Add New Product</h4>
+        <div class="addpsbtn text-center">
+            <button type="button" class="btn uploadimgbtn" id="addnewpbtn"><img class="img-fluid pr-2 pb-1" src="../../../static/imgs/addpbtn.svg" alt="image">Add New Product</button>
+        </div>
+        <div id="page-content-wrapper" class="p-4 addproductsform">
+            <div class="productimg d-block">
+                <p class="plabel">PRODUCT IMAGE</p>
+                <div class="picplaceholder p-2 text-center">
+                    <img class="img-fluid" src="../../../static/imgs/uploadmsg.svg" alt="image" id="viewproductpic">
+                </div>
+                <div class="deluploadbtns d-flex pt-4">
+                    <button type="button" class="btn uploadimgbtn" id="uploadproductpic"><img class="img-fluid pr-2" src="../../../static/imgs/uploadicon.svg" alt="image">upload</button>
+                    <button type="button" class="btn deleteimgbtn ml-auto"><img class="img-fluid pr-2" src="../../../static/imgs/deleteicon.svg" alt="image" id="delviewproductpic">delete</button>
+                </div>
+            </div>
+
+            <div class="productinfo d-block">
+                <p class="plabel">PRODUCT INFO</p>
+                <div class="category pb-3">
+                    <label for="categories">Category name:</label>
+                    <select id="categories" class="pb-2">
+                      <option value="volvo">General</option>
+                    </select>
+                </div>
+                <div class="productname pb-4">
+                    <label class="pplabel">Product Name</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter product name">
+                </div>
+                <div class="productdescr pb-4">
+                    <label class="pplabel">Product description</label>
+                    <input type="text" class="form-control pt-0" id="exampleFormControlInput2" placeholder="Enter description">        
+                </div>
+                <div class="productqty pb-4">
+                    <label class="pplabel">Product Quantity</label>
+                    <input type="number" class="form-control" id="exampleFormControlInput3" placeholder="0">       
+                </div>
+                <div class="productprice pb-4">
+                    <label class="pplabel">Product Price (R)</label>
+                    <input type="number" class="form-control" id="exampleFormControlInput4" placeholder="0">          
+                </div>
+                <div class="productstatus pb-4">
+                    <label for="status">Product Status:</label>
+                    <select id="status" class="pb-2">
+                      <option value="volvo">Enable</option>>
+                    </select>                  
+                </div>
+            </div>
+
+            <div class="productformbtns d-flex">
+                <button type="button" class="btn btn-light discardbtn">Discard</button>
+                <button type="button" class="btn btnsave ml-auto" id="saveproductbtn">Save</button>
+            </div>
+          <div class="container-fluid d-none">
+            <div class="container addproducts">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ formset.management_form }}
+                    {% for form in formset %}
+                        <div class="productform" id="productform{{forloop.counter0}}">
+                            {% for field in form %}
+                                {% with name="Productpic" %}
+                                    {% ifnotequal field.label name %}
+                                        {% render_field field class="productinput" %}
+                                    {% else %}
+                                        {% render_field field class="productinput" onchange="loadFile(event)" %}
+                                    {% endifnotequal %}
+                                {% endwith %}
+                             {% endfor %}
+                        </div>
+                    <hr>
+                    {% for dict in formset.errors %}
+                        {% for error in dict.values %}
+                        {{ error }}
+                        {% endfor %}
+                    {% endfor %}
+                    {% endfor %}
+                    <button type="submit" class="btn abtn" id="productformsubmit">Submit</button>
+                </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="rightcontainer">
+        <section id="qoutations" class="pt-5 pb-5">
+   <div class="container applications">
+       <div class="tablebg d-block mx-auto">
+        <div class="tabletop d-flex">
+            <h4>Applications</h4>
+            <div class="filters d-flex ml-auto">
+                <select id="status" class="mt-2">
+                  <option value="volvo">Upcoming</option>
+                  <option value="saab">Past</option>
+                </select> 
+            </div>
+        </div>
+
+        <div class="row myth d-flex pt-3">
+            
+            <div class="col"><p class="thdata"><strong>TYPE</strong></p></div>
+            <div class="col"><p class="thdata"><strong>PLAN</strong></p></div>
+            <div class="col"><p class="thdata"><strong>DATE APPLIED</strong></p></div>
+            <div class="col"><p class="tddata"><strong>LOCATION</strong></p></div>
+            <div class="col"><p class="thdata"><strong>REF NUMBER</strong></p></div>
+            <div class="col"><p class="thdata"><strong>STATUS</strong></p></div>
+            <div class="col"><p class="thdata"><strong>SUPPLY AGREEMENT</strong></p></div>
+            <div class="col"><p class="thdata"><strong>WAYLEAVE AGREEMENT</strong></p></div>
+            <div class="col"><p class="thdata d-none"><strong>WAYLEAVE AGREEMENT</strong></p></div>
+            <div class="col"><p class="thdata d-none"><strong>SUPPLY AGREEMENT</strong></p></div>
+        </div>
+
+
+        {% for i in orders %}
+        <div class="row mytd d-flex">
+            <div class="col"><p class="tddata pt-2">{{i.product}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.status}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.date_created}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.loc}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.appnum}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.appstatus}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.agreebtn}}</p></div>
+            <div class="col"><p class="tddata pt-2">{{i.agreewayleave}}</p></div>
+            <div class="col"><p class="tddata pt-2 d-none">{{i.appcontrol}}</p></div>
+            <div class="col"><p class="tddata pt-2"><a class="btn btn-primary btn-sm" href="{% url 'create_order' customer.id %}" role="button">update</a></p></div>
+            <div class="col"><p class="tddata pt-2"><a class="btn btn-danger btn-sm" href="{% url 'delete' i.id %}" role="button">delete</a></p></div>
+        </div>
+       {% endfor%}
+
+        <div class="buttominfo d-flex ml-auto">
+            <div class="navbtns ml-auto d-flex">
+                <p class="tddata pl-2">End of results</p>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+        <section id="qoutations2" class="pt-5 pb-5">
+   <div class="container">
+       <div class="tablebg d-block mx-auto">
+        <div class="tabletop d-flex">
+            <h4>Applications</h4>
+            <div class="filters pt-4 ml-auto">
+                <select id="status" class="mt-2">
+                  <option value="volvo">Upcoming</option>
+                  <option value="saab">Past</option>
+                </select> 
+            </div>
+        </div>
+
+        <div class="row myth d-flex pt-3">
+            <div class="col-sm-1"><p class="thdata"><strong>TYPE</strong></p></div>
+            <div class="col-sm-1"><p class="thdata"><strong>PLAN</strong></p></div>
+            <div class="col-sm-1"><p class="thdata"><strong>DATE</strong></p></div>
+            <div class="col-sm-1"><p class="tddata"><strong>LOCATION</strong></p></div>
+            <div class="col-sm-1"><p class="thdata"><strong>REF Number</strong></p></div>
+            <div class="col-sm-1"><p class="thdata"><strong>STATUS</strong></p></div>
+            <div class="col-sm-1"><p class="thdata"><strong>SUPPLY</strong></p></div>
+            <div class="col-sm-1"><p class="thdata"><strong>WAYLEAVE</strong></p></div>
+            <div class="col-sm-1"><p class="thdata d-none"><strong>WAYLEAVE AGREEMENT</strong></p></div>
+            <div class="col-sm-1"><p class="thdata d-none"><strong>SUPPLY AGREEMENT</strong></p></div>
+        </div>
+
+
+        {% for i in orders %}
+        <div class="row mytd d-flex">
+            <div class="col-sm-1"><p class="tddata pt-1">{{i.product}}</p></div>
+            <div class="col-sm-1"><p class="tddata pt-1">{{i.status}}</p></div>
+            <div class="col-sm-1"><p class="tddata pt-1">{{i.date_created}}</p></div>
+            <div class="col-sm-1"><p class="tddata pt-1">{{i.loc}}</p></div>
+            <div class="col-sm-1"><p class="tddata pt-1">{{i.appnum}}</p></div>
+            <div class="col-sm-1"><p class="tddata pt-1">{{i.appstatus}}</p></div>
+            <div class="col-sm-1"><p class="tddata pt-1">{{i.agreebtn}}</p></div>
+            <div class="col-sm-1"><p class="tddata pt-1">{{i.agreewayleave}}</p></div>
+            <div class="col-sm-1"><p class="tddata pt-1 d-none">{{i.appcontrol}}</p></div>
+            <div class="col-sm-1"><p class="tddata pt-1"><a class="btn-primary btn-xs ml-2" href="{% url 'create_order' customer.id %}" role="button">update</a></p></div>
+            <div class="col-sm-1"><p class="tddata pt-1"><a class="btn-danger btn-xs" href="{% url 'delete' i.id %}" role="button">delete</a></p></div>
+        </div>
+       {% endfor%}
+
+        <div class="buttominfo d-flex ml-auto">
+            <div class="navbtns ml-auto d-flex">
+                <p class="tddata pl-2">End of results</p>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function(){
+        $("#submitBtn").click(function(){
+            $("#myForm").submit(); // Submit the form
+        });
+    });
+</script>
+{% endblock content %}

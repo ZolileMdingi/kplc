@@ -1,0 +1,144 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+
+<nav class="navbar navbar-expand-md fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="../../../static/imgs/logo.svg" class="img-fluid" alt=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-3 mt-3">
+            <a class="nav-link active">Dashboard</a>
+          </li>
+           <li class="nav-item mr-3 mt-3">
+               {% for i in userid %}
+                <a class="nav-link" href="{% url 'customer' i %}">Profile</a>
+               {% endfor %}
+           </li>
+           <li class="nav-item mr-3 mt-3 pt-2">
+            <p>Hello, {{request.user}}</p>
+           </li>
+           <li class="nav-item mr-3 mt-3">
+            <a class="btn btn-primary btn-md logoutbtn" href="{% url 'logout' %}" role="button">logout</a>
+           </li>
+        </ul>
+      </div>
+   </div>
+</nav>
+<br>
+<br>
+<br>
+<br>
+<section id="stats">
+    <div class="container">
+        <div class="row p-3">
+            <div class="col-md-4 col-lg-4">
+                <div class="totalorders text-center p-4">
+                    <h4>Total Applications</h4>
+                    <hr>
+                    <h4>{{total_orders}}</h4>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class="totalorders text-center p-4">
+                    <h4>Applications Delivered</h4>
+                    <hr>
+                    <h4>{{total_delivered}}</h4>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class="totalorders text-center p-4">
+                    <h4>Applications Pending</h4>
+                    <hr>
+                    <h4>{{total_pending}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="orders">
+    <div class="container">
+        <div class="row p-3">
+            <!--<div class="col-md-4 col-lg-4">
+                <h3>CUSTOMERS</h3>
+                <div class="totalorders text-center p-4">
+                    
+                    <a class="btn btn-info create_cust" href="{% url 'create_order' %}" role="button">Create Application</a>
+                    <table class="table table-borderless table-sm">
+                       <thead>
+                           <tr>
+                               <th scope="col">Customer</th>
+                               <th scope="col">Phone</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           {% for i in customers %}
+                            <tr>
+                                <td><a href="{% url 'customer' i.id %}">View</a></td>
+                                <td>{{i.name}}</td>
+                                <td>{{i.phone}}</td>
+                            </tr>
+                           {% endfor %}
+                       </tbody>
+                   </table>
+
+                </div>
+            </div>-->
+            <div class="col-md-4 col-lg-4">
+                <h3>Jobs</h3>
+                <div class="totalorders2 text-center p-4">
+                    <div class="table-responsive-md">
+                        <table class="table table-borderless table-sm">
+                           <thead>
+                               <tr>
+                                   <th scope="col">Type</th>
+                                   <th scope="col">Date applied</th>
+                                   <th scope="col">Plan</th>
+                                   <th scope="col">Loc</th>
+                                   <th scope="col">Application No.</th>
+                                   <th scope="col">Application Status</th>
+                                   <th scope="col">Site info</th>
+                                   
+                               </tr>
+                           </thead>
+                           <tbody>
+                               {% for i in orders %}
+                                <tr>
+                                    <td>{{i.product}}</td>
+                                    <td>{{i.date_created}}</td>
+                                    <td>{{i.status}}</td>
+                                    <td>{{i.loc}}</td>
+                                    <td>{{i.appnum}}</td>
+                                    <td id="appstatusp">{{i.appstatus}}</td>
+                                    <td>{{i.siteinfo}}</td>
+                                    <td>
+                                        {% for j in customers %}
+                                            {% ifequal j.id i.customer.id %}
+                                                <a id="jobinstall{{ forloop.counter0 }}" class="btn btn-primary btn-sm" href="{% url 'icms' j.id %}" role="button">Send to Designer</a>
+                                                
+                                            {% endifequal %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                               {% endfor %}
+                           </tbody>
+                       </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--
+<script>
+    $(document).ready(function(){
+        console.log($("#appstatusp")[0]);
+    });
+</script>
+-->
+{% endblock content %}

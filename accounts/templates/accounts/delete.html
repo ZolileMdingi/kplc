@@ -1,0 +1,16 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+<p>Are you sure you wanna delete? "{{item}}"</p>
+  
+<form action="{% url 'delete' item.id %}" method="POST">
+    {% csrf_token %}
+    <a class="btn btn-info" href="{% url 'home' %}" role="button">No</a>
+    {% with myvar="Under Review" %}
+        {% ifequal item.appstatus myvar %}
+            <button type="submit" class="btn btn-danger">Yes</button>
+        {% endifequal %}
+    {% endwith %}
+</form>
+{% endblock content %}
+

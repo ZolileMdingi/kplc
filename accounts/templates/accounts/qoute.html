@@ -1,0 +1,186 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+<style>
+
+    .tablebg {
+      background: #ffffff;
+      width: max-content;
+      padding: 25px;
+      border-radius: 20px;
+      justify-content: center;
+    }
+
+    .thdata {
+      font-size: 12px;
+
+    }
+
+    .myth {
+      border-bottom: 2px solid #fafafa;
+    }
+
+    .buttominfo {
+      border-top: 2px solid #fafafa;
+      padding-top: 15px;
+    }
+
+    .tddata {
+      font-size: 12px;
+    }
+    
+    input[type=text], input[type=number], input[type=email], input[type=password], select {
+        border: none;
+        border-radius: 25px;
+        height: 35px;
+        text-indent: 3px;
+        background: #f6f6f9;
+        font-size: 15px;
+        width: 100%;
+        margin: 0px;
+
+    }
+    
+    .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #B3BBBE;
+      opacity: 0.8; /* Firefox */
+    }
+      
+      
+     ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #B3BBBE;
+      opacity: 0.8; /* Firefox */
+    }
+      
+      option, select {
+          font-size: 15px;
+          padding: 8px;
+      }
+      .filterlabel {
+          color: #B3BBBE;
+      }
+    
+    .thdata {
+        width: max-content;
+    }
+    a {
+        text-align: left;
+    }
+    
+    
+    
+    
+    
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    #qoutations {
+        margin: 14px;
+    }
+    .tablebg {
+        width: auto;
+        padding: 18px;
+    }
+    .thdata {
+      font-size: 10px;
+
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    #qoutations {
+        margin: 14px;
+    }
+    .tablebg {
+        width: auto;
+        padding: 18px;
+    }
+    .thdata {
+      font-size: 10px;
+
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {...}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {...}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...}
+      
+</style>
+<nav class="navbar navbar-expand-md fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="../../../static/imgs/logo.svg" class="img-fluid" alt=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><img class="img-fluid" src="../../../static/imgs/menuicon.svg" alt="image"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-3 mt-3">
+            <a class="nav-link active" href="{% url 'user' %}">Home</a>
+          </li>
+            <li class="nav-item mr-3 mt-3">
+                 <a class="nav-link" href="">Qoutations &amp; Payments</a>
+            </li>
+          <li class="nav-item mr-3 mt-3">
+            <a class="nav-link active" href="{% url 'create_app' customer.id %}">Applications</a>
+          </li>
+           <li class="nav-item mr-3 mt-3">
+               <a class="nav-link" href="{% url 'customer' customer.id %}">Profile</a>
+           </li>
+           <li class="nav-item mr-3 mt-3 pt-2">
+            <p>Hello, {{request.user}}</p>
+           </li>
+           <li class="nav-item mr-3 mt-3">
+            <a class="btn btn-primary btn-md logoutbtn" href="{% url 'logout' %}" role="button">logout</a>
+           </li>
+        </ul>
+      </div>
+   </div>
+</nav>
+<br>
+<br>
+<br>
+<br>
+
+
+<section id="qoutations" class="pt-5">
+    <div class="tablebg d-block mx-auto">
+        <div class="tabletop d-flex">
+            <h4>Qoutations</h4>
+            <h2 class="d-none" id="tbordercounter">{{orders_count}}</h2>
+            <div class="filters d-flex ml-auto">
+                <select id="status" class="mt-2">
+                  <option value="volvo">Upcoming</option>
+                  <option value="saab">Past</option>
+                </select> 
+            </div>
+        </div>
+
+        <div class="row myth d-flex pt-3">
+            <div class="col"><p class="thdata"><strong>REF NUMBER</strong></p></div>
+            <div class="col"><p class="thdata"><strong>QOUTATION</strong></p></div>
+            <div class="col"><p class="thdata"><strong>PAYMENT PROOF</strong></p></div>
+            <div class="col"><p class="tddata"></p></div>
+        </div>
+
+
+        {% for i in orders %}
+        <div class="row mytd d-flex">
+            <div class="col"><p class="tddata pt-2">{{i.appnum}}</p></div>
+            <div class="col"><p class="tddata pt-2"><a href="/imgs/{{i.qoutation}}" class="text-info">View Qoute</a></p></div>
+            <div class="col"><p class="tddata pt-2"><a href="{% url 'payment' i.id %}" class="text-info">Upload</a></p></div>
+        </div>
+       {% endfor%}
+
+        <div class="buttominfo d-flex ml-auto">
+            <div class="navbtns ml-auto d-flex">
+                <p class="tddata pl-2">End of results</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

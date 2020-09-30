@@ -1,0 +1,66 @@
+body{
+    background: #fafafa;
+}
+
+.totalorders{
+    background: #ffffff;
+    border-radius: 10px;
+}
+#orders .totalorders{
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+#orders .totalorders2{
+    background: #ffffff;
+    border-radius: 10px;
+    width: 157%;
+}
+
+#customer .totalorders2{
+    width: 157%;
+}
+
+.pinfo{
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+
+.create_cust{
+    width: 100%;
+}
+
+.create_order{
+    width: 100%;
+}
+
+.searchform{
+    display: block;
+}
+#search .search {
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.cust{
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.form1{
+    display: flex;
+}
+
+.form1{
+    background: white;
+    padding: 26px;
+}
+
+input[type=checkbox]{
+    display: none;
+}
+
+.labelform{
+    display: block;
+}
