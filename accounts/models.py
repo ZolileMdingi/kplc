@@ -141,7 +141,7 @@ class Customer(models.Model):
         ( "MARUNGU","MARUNGU"),
         ( "SAGALA","SAGALA"),
         ( "MBOLOLO","MBOLOLO"),
-        ( "KALOLEN","KALOLEN"),
+        ( "KALOLENI","KALOLENI"),
     ]
     CONSTITUENCIES = [
         ( "Changamwe","Changamwe"),
@@ -169,7 +169,7 @@ class Customer(models.Model):
         ( "Taveta","Taveta"),
         ( "Wundanyi","Wundanyi"),
         ( "Mwatate","Mwatate"),
-        ( "Vo","Vo")
+        ( "Voi","Voi")
 
     ]
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
